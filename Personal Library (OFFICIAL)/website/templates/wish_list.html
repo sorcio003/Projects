@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Wish List{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/wish.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<div>
+    <br><br><br>
+</div>
+
+<div class='container' align="center">
+    <div  class='list flex-column ' style="width: 700px;" >
+        <form method="post" class="m.5">
+            <div >
+                <div class='carta flex-row open'>
+                    <div class="form-group book-input book">
+                        <label for="url_cover">Cover</label>
+                        <input type="text" class="form-control" name="url_cover"
+                        placeholder="URL Code" value="{{ user.url_cover }}" required></input>
+                    </div>
+                <div class='flex-column info'>
+                    <div class="form-group title">
+                        <label for="titolo">Titolo</label>
+                        <input type="text" class="form-control" name="titolo"
+                        placeholder="Inserisci un Titolo" value="{{ user.titolo }}" required></input>
+                        </div>
+                        <div class="form-group title" >
+                            <label for="autore">Autore</label>
+                            <input type="text" class="form-control" name="autore"
+                            placeholder="Inserisci un Autore" value="{{ user.autore }}" required></input>
+                        </div>
+                    <div class='hidden bottom summary'>
+                        <div class="form-group title" style="width: 50px; text-align:center;">
+                            <label for="costo">Costo</label>
+                              <input type="text" class="form-control" name="costo"
+                               value="{{ user.costo }}" required></input>
+                            </div>
+                    </div>
+                </div>
+                    <div class='hidden bottom' style="transform:translate(50px,0%);">
+                        <div class="form-group simple">
+                            <button type="submit" class="btn btn-primary">ADD</button>
+                        </div>
+                    </div>
+                </div>
+                </div>          
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="output">
+    {% for book in user.wish_list %}
+
+<div class='container responsive' align="center">
+    <div class='list flex-column ' style="width: 700px;" >
+      <div >
+        <div class='card flex-row'>
+          <img src='{{book.url_cover}}' class='book'>
+          <div class='flex-column info'>
+            <div class='title'>{{book.titolo}}</div>
+            <div class='author'>{{book.autore}}</div>
+            <div class='hidden bottom summary'>
+              
+            </div>
+          </div>
+          <div class='flex-column group'>
+            <div class='members'>
+              <span class='current'>Costo</span> /
+              <span class='max'>{{book.costo}} €</span>
+            </div>
+            <div class='hidden bottom' style="transform:translate(-118px,0%);">
+                <form action="/delete-wish-list" method="POST" style="float: right;">
+              <button onClick="deleteWish_List({{ book.id }})" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
+          </div>
+        </div>          
+      </div>
+
+    </div>
+</div>
+
+{% endfor %}
+
+</div>
+
+<div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+<script>
+    let old = $('.card').get(0);
+    $('.card').click(function(){
+      if(old!=null && $(old).hasClass('open'))
+        $(old).toggleClass('open');
+       $(this).toggleClass('open');
+       old = this;
+    })
+
+    $(document).on("click", function(e) {
+        if ($(e.target).is(".card") === false) {
+          $(".card").removeClass(".open");
+        }
+      });
+    
+</script>
+
+{% endblock %}

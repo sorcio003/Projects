@@ -1,0 +1,103 @@
+.stitch_book{
+    transform: scale(75%);
+    width: 100%;
+}
+
+  .theme-dark {
+    --color-primary: #1662c7;
+    --color-secondary: #034272;
+    --color-accent: #c60a0a;
+    --font-color: #000000;
+    --image: url("https://www.pngall.com/wp-content/uploads/12/Disney-Lilo-And-Stitch-PNG-File.png");
+    --title: "Ohana"
+  }
+  .theme-light {
+    --color-primary: #513543;
+    --color-secondary: #310a2b;
+    --color-accent: #028f00;
+    --font-color: #ffffff;
+    --image: url("https://www.pngmart.com/files/17/Toothless-Night-Fury-PNG-File.png");
+    --title: "Dragon"
+  }
+    .content {
+  position: relative;
+}
+
+.content h2 {
+  color: #fff;
+  font-size: 3em;
+  position: absolute;
+  transform: translate(0%, 0%);
+}
+
+.content h2:nth-child(1) {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-accent);
+}
+
+.content h2:nth-child(2) {
+  color: var(--color-secondary);
+  animation: animate 4s ease-in-out infinite;
+}
+@media (max-width: 400px) {
+    .Stitch{
+        transform: scale(0.5) translate(-50%, 10%);
+    }
+}
+
+
+@keyframes animate {
+  0%,
+  100% {
+    clip-path: polygon(
+      0% 45%,
+      16% 44%,
+      33% 50%,
+      54% 60%,
+      70% 61%,
+      84% 59%,
+      100% 52%,
+      100% 100%,
+      0% 100%
+    );
+  }
+
+  50% {
+    clip-path: polygon(
+      0% 60%,
+      15% 65%,
+      34% 66%,
+      51% 62%,
+      67% 50%,
+      84% 45%,
+      100% 46%,
+      100% 100%,
+      0% 100%
+    );
+  }
+}
+
+/*Auto writing*/
+@keyframes typing {
+    from {
+      width: 0;
+    }
+  }
+
+  @keyframes blink-caret {
+    50% {
+      border-color: transparent;
+    }
+  }
+
+.animation {
+    transition: 0.8s;
+    font: bold 200% Consolas, Monaco, monospace;
+    border-right: .1em solid black;
+    width: 30.20ch;
+    margin: 2em 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-animation: typing 5s steps(30, end),
+                 blink-caret .5s step-end infinite alternate;
+  }

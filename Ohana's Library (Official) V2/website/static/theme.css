@@ -1,0 +1,54 @@
+
+
+  .change {
+    background-color: var(--color-primary);
+    color: var(--font-color);
+  }
+  .title::before{
+    content: var(--title);
+  }
+  .cover{
+    content: var(--cover-image);
+  }
+  .second_change{
+    background-color: var(--color-secondary);
+  }
+
+  .logout{
+    color: var(--color-primary);
+  }
+  .logout2{
+    color: var(--color-secondary);
+  }
+  .submit_button{
+    background-color: var(--color-accent);
+    color: var(--font-color);
+    border-color: var(--color-accent);
+  }
+  .submit_button:hover{
+    background-color: var(--color-accent-hover);
+    color: var(--font-color-hover);
+    border-color: var(--color-accent-hover);
+  }
+  .profile{
+    background-image: var(--profile-image);
+    height: 350px;
+        width: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+  }
+  .Other-text{
+    color: var(--extra);
+  }
+  .nav-link:hover{
+    color: var(--font-color-hover);
+  }
+   .Stitch{
+    content: var(--logout-image);
+  }
+  .login-image{
+    content: var(--login-image);
+  }
+

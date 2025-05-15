@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% block title %}Ohana's Library{% endblock %}
+
+{% block content %}
+
+<div class="m-5">
+  <form method="post" class="m.5">
+
+    <div class="form-group">
+      <label for="url_cover">Cover</label>
+        <input type="text" class="form-control" name="url_cover"
+        placeholder="Inserisci un codice URL" value="{{ user.url_cover }}" required></input>
+    </div>
+
+    <div style="columns: 3; width: min-content;">
+        <div class="form-group" style="width: 80px;">
+        <label for="mobilebg">Background</label>
+          <input type="color" class="form-control color-Getter" name="mobilebg" style="width: 60px; height: 40px;"
+           value="{{ user.mobilebg }}" required></input>
+        </div>
+
+          <div class="form-group" style="width: 80px;">
+          <label for="introbg">UnderLine</label>
+            <input type="color" class="form-control color-Getter" name="introbg" style="width: 60px; height: 40px;"
+             value="{{ user.introbg }}" required></input>
+          </div>
+
+            <div class="form-group" style="width: 80px;">
+            <label for="fontcolor">Text</label>
+              <input type="color" class="form-control color-Getter" name="fontcolor" style="width: 60px; height: 40px; border-radius: 10%;"
+               value="{{ user.fontcolor }}" required></input>
+            </div>
+    </div>
+
+        <div class="form-group" >
+          <label for="autore">Autore</label>
+            <input type="text" class="form-control" name="autore"
+            placeholder="Inserisci un Autore" value="{{ user.autore }}" required></input>
+        </div>
+
+        <div class="form-group">
+          <label for="titolo">Titolo</label>
+            <input type="text" class="form-control" name="titolo"
+            placeholder="Inserisci un titolo" value="{{ user.titolo }}" required></input>
+          </div>
+
+          <div class="form-group">
+            <label for="genere">Genere</label>
+              <input type="text" class="form-control" name="genere"
+              placeholder="Inserisci un Genere" value="{{ user.genere }}" ></input>
+            </div>
+
+            <div class="form-group">
+              <label for="tipo">Tipologia</label>
+                <input type="text" class="form-control" name="tipo"
+                placeholder="Inserisci il tipo" value="{{ user.tipo }}" ></input>
+              </div>
+
+          <div class="form-group">
+            <label for="trama">Trama</label>
+              <textarea class="form-control" name="trama"
+              placeholder="Inserisci la Trama" value="{{ user.trama }}" style="resize:none; height:150px;" >{{ user.trama }}</textarea>
+            </div>
+
+      <div style="columns: 3; width: min-content;">
+          <div class="form-group" style="width: 50px; text-align:center;">
+          <label for="valutazione">Voto</label>
+            <input type="text" class="form-control" name="valutazione"
+             value="{{ user.valutazione }}"></input>
+          </div>
+
+            <div class="form-group" style="width: 50px; text-align:center;">
+            <label for="spicy">Spicy</label>
+              <input type="text" class="form-control" name="spicy"
+               value="{{ user.spicy }}"></input>
+            </div>
+
+              <div class="form-group" style="width: 50px; text-align:center;">
+              <label for="lacrime">Lacrime</label>
+                <input type="text" class="form-control" name="lacrime"
+                 value="{{ user.lacrime }}"></input>
+              </div>
+      </div>
+
+
+      <div style="columns: 2; width: min-content;">
+        <div class="form-group" style="width: 150px;">
+        <label for="date_start">Data di Inzio</label>
+          <input type="text" class="form-control" name="date_start"
+           value="{{ user.date_start }}" ></input>
+        </div>
+
+          <div class="form-group" style="width: 150px;">
+          <label for="date_end">Data di Fine</label>
+            <input type="text" class="form-control" name="date_end"
+             value="{{ user.date_end }}" ></input>
+          </div>
+    </div>
+
+      <div class="form-group" style="width: 200px;">
+      <label for="favourite_Charac">Personaggio Preferito</label>
+        <input type="text" class="form-control" name="favourite_Charac"
+         value="{{ user.favourite_Charac }}" ></input>
+      </div>
+
+        <div class="form-group" style="width: 200px;">
+        <label for="hated_Charac">Personaggio Odiato</label>
+          <input type="text" class="form-control" name="hated_Charac"
+           value="{{ user.hated_Charac }}" ></input>
+        </div>
+
+  <div class="form-group">
+    <label for="favourite_Scene">Scena Preferita:</label>
+      <textarea class="form-control" name="favourite_Scene"
+      placeholder="Inserisci una scena preferita" value="{{ user.favourite_Scene }}" style="resize:none; height:90px;" >{{ user.favourite_Scene }}</textarea>
+    </div>
+
+  <div class="form-group">
+    <label for="best_Phrase">Frase Preferita:</label>
+      <textarea class="form-control" name="best_Phrase"
+      placeholder="Inserisci una frase preferita" value="{{ user.best_Phrase }}" style="resize:none; height:90px;">{{ user.best_Phrase }}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="review">La tua recensione:</label>
+        <textarea class="form-control" name="review"
+        placeholder="Inserisci la tua recensione" value="{{ user.review }}" style="resize:none; height:90px;">{{ user.review }}</textarea>
+      </div>
+    
+
+    <br>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Crea</button>
+      </div>
+  </form>
+</div>
+
+<div class="user">
+  <div class="back"></div>
+  <div class="page6"></div>
+  <div class="page5"></div>
+  <div class="page4"></div>
+  <div class="page3"></div>
+  <div class="page2"></div>
+  <div class="page1"></div>
+  <div class="front"></div>
+</div>
+
+  <script>
+    var url_cover = document.getElementsByName('url_cover')
+    var autore = document.getElementsByName('autore')
+    var titolo = document.getElementsByName('titolo')
+    var genere = document.getElementsByName('genere')
+    var trama = document.getElementsByName('trama')
+    var valutazione = document.getElementsByName('valutazione')
+    var spicy = document.getElementsByName('spicy')
+    var lacrime = document.getElementsByName('lacrime')
+    var date_start = document.getElementsByName('date_start')
+    var date_end = document.getElementsByName('date_end')
+    var favourite_Charac = document.getElementsByName('favourite_Charac')
+    var hated_Charac = document.getElementsByName('hated_Charac')
+    var favourite_Scene = document.getElementsByName('favourite_Scene')
+    var best_Phrase = document.getElementsByName('best_Phrase')
+    var review = document.getElementsByName('review')
+    var tipo = document.getElementsByName('tipo')
+
+    if (url_cover.value == null){
+        url_cover.value = "{{ request.form['url_cover'] }}"
+    }
+    if (autore.value == null){
+        autore.value = "{{ request.form['autore'] }}"
+    }
+    if (titolo.value == null){
+        titolo.value = "{{ request.form['titolo'] }}"
+    }
+    if (genere.value == null){
+        genere.value = "{{ request.form['genere'] }}"
+    }
+    if (trama.value == null){
+      trama.value = "{{ request.form['trama'] }}"
+    }
+    if (valutazione.value === null){
+        valutazione.value = "{{ request.form['valutazione'] }}"
+    }
+    if (spicy.value == null){
+        spicy.value = "{{ request.form['spicy'] }}"
+    }
+    if (lacrime.value == null){
+        lacrime.value = "{{ request.form['lacrime'] }}"
+    }
+    if (date_start.value == null){
+        date_start.value = "{{ request.form['date_start'] }}"
+    }
+    if (date_end.value == null){
+        date_end.value = "{{ request.form['date_end'] }}"
+    }
+    if (favourite_Charac.value == null){
+        favourite_Charac.value = "{{ request.form['favourite_Charac'] }}"
+    }
+    if (hated_Charac.value == null){
+        hated_Charac.value = "{{ request.form['hated_Charac'] }}"
+    }
+    if (favourite_Scene.value == null){
+        favourite_Scene.value = "{{ request.form['favourite_Scene'] }}"
+    }
+    if (best_Phrase.value == null){
+        best_Phrase.value = "{{ request.form['best_Phrase'] }}"
+    }
+    if (review.value == null){
+      review.value = "{{ request.form['review'] }}"
+  }
+
+  if (tipo.value == null){
+    tipo.value = "{{ request.form['tipo'] }}"
+}
+  </script>
+
+{% endblock %}

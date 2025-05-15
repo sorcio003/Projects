@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+{% block title %}Ohana's Library{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="/static/edit_btn.css">
+
+<style>
+    .div1{
+        background-image: url('https://i.pinimg.com/originals/7e/b1/9f/7eb19fc70911367e43c4fbac8dd26c93.png');
+        height: 350px;
+        width: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+    #titles{
+        color: black;
+        height: 50px;
+        text-align: center;
+        background-color: var(--color-primary);
+        transition: 2.1s;
+    }
+
+    #titles:hover{
+        color: white;
+        text-align: center;
+        background-color: var(--color-secondary);
+        transition: 2.1s;
+    }
+</style>
+
+<style>
+    :root{
+        --perspective: 1000px;
+        --link-color:#010790;
+      }
+
+      * {
+          box-sizing: border-box;
+      }
+
+      body{
+        font-family: 'Pontano Sans', sans-serif;
+        font-size: calc(0.65em + .05vw);
+      }
+
+      a{
+        color:var(--link-color);
+        font-weight:bold;
+      }
+
+      h1{
+        font-family: 'Stint Ultra Expanded', cursive;
+        font-size: 1.5em;
+        text-align: center;
+      }
+
+      .book {
+        display: block;
+        position: relative;
+        width: 320px;
+          height:453px;
+        margin:0 auto;
+          margin-top: 5rem;
+      }
+
+      .gloss{
+        position: absolute;
+        top:0;
+          z-index:200;
+        overflow: hidden;
+        width:20%;
+        height:100%;
+        opacity:0.5;
+        background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.2), rgba(255,255,255,0));
+        transition:all .5s;
+        transform: translateX(-50%) rotateY(0deg);
+        transform-origin: left center;
+      }
+
+      .cover {
+          position: absolute;
+        width:100%;
+          z-index:100;
+        transition:transform .5s;
+        transform: translateX(0);
+        transform-origin: left center;
+        backface-visibility: hidden;
+      }
+
+      .description{
+        position: absolute;
+        left:0;
+        top:0;
+        width:inherit;
+        height:inherit;
+          border: solid 1px grey;
+          background:white;
+          transition: all 1s;
+          padding: 10% 10%;
+        padding-top:5%;
+        z-index:1;
+      }
+
+      .description h1{
+        font-family: 'Pontano Sans', sans-serif;
+          font-size: calc(0.75em + .1vw);
+        text-align: center;
+        line-height: 1.25em;
+      }
+
+      .book:hover{
+              cursor: pointer;
+      }
+
+      .book:hover .cover {
+          transform: perspective(var(--perspective)) rotateY(-80deg);
+      }
+
+      .book:hover .gloss {
+          transform: perspective(var(--perspective)) rotateY(-80deg) translateX(100%) scaleX(5);
+      }
+
+      .book:hover .description {
+          transform: translateX(20%);
+      }
+
+      .rating {
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        text-align: center;
+        height:2em;
+        margin:0 auto;
+        color:grey;
+      }
+
+      .rating > span {
+        display: inline-block;
+        position: relative;
+        font-size: 1.75em;
+        margin-right:.2em;
+
+      }
+
+      .rating > span ~ span:before {
+         content: "\2605";
+         position: absolute;
+         color:#8d2a06;
+      }
+
+</style>
+
+{% if user.username == "IDadini"%}
+
+    <div id="handmaid" class="book">
+      <div class="gloss"></div>
+      <img class="cover" src="https://pepco.it/wp-content/uploads/2023/05/photo-664x900-2.png?x79140" style="height:101%;" >
+      <div class="description">
+        <h1>The Handmaid's Tale</h1>
+        <hr>
+        <p>La Ohana' Library nasce nel Giugno del 2023 Quando il suo fondatore Samuel Drake 'pseudonimo di Samuele Pannitteri'
+          decise di approcciarsi al mondo dello sviluppo di siti web in vista del 4° mesiversario con la sua ragazza
+          Aurora Travasoni 'Akak Dada'. <br>
+          Il Progetto della Ohana's Library si basa su un libro gia esistente doe ogni appassionato di letteratura
+          possa inserire le proprie recensioni dei libri letti tenendo conto delle scene che lo/a hanno colpito/a,
+          inclusi i personaggi più odiati e preferiti.
+        </p>
+        <blockquote>“Dedico Questo progetto alla Donna migliore che abbia mai incontrato.
+           Da anni io e lei ci conosciamo, e anche se abbiamo passato mesi di odio, di intolleranza,
+           ci siamo riavvicinati, passando dall'essere semplici conoscenti, ad amici, a migliori amici, ad fidanzati.
+           Sono il ragazzo più fortunato al mondo. Ti Amo Dada❤️”
+          <br><i>Ohana's Library</i></blockquote>
+      </div>
+    </div>
+    <h1>The Ohana's Library</h1>
+    <div class="rating">
+      <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+    </div>
+{% endif %}
+
+<div align="center" class="profile" style="transform: translateY(20px);">
+    <div style="transform: translateY(40px);">
+        <p style="background-color: var(--color-primary); color: white; font-style:normal; border-radius: 20%; font-size: 42px; font-family: 'Courier New', Courier, monospace; width: min-content; transform: translateY(-20px);">{{ user.username }}</p>
+    </div>
+</div>
+<div style="float:right;">
+    <button class="editBtn" onclick="redirectToCustomPage()">
+        <svg height="1em" viewBox="0 0 512 512">
+          <path
+            d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"
+          ></path>
+        </svg>
+      </button>
+</div>
+
+<div style="transform: translateY(70px);">
+    <p hidden="true">{{ user.notes }}</p>
+    <h3 id="titles">Libri Aggiunti: {{n_libri }}</h3>
+
+    <ul id="myul">
+
+    </ul>
+
+    <p>Tempo Medio Giorni impiegati a leggere : <strong>{{tempo_medio}}</strong> giorni</p>
+    <p>Genere più letto: <strong>{{genere_più_comune}}</strong></p>
+
+    <canvas id="pieChart"></canvas>
+
+</div>
+
+<br><br><br><br><br><br>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('pieChart').getContext('2d');
+    const data = {
+        labels: {{ generi_libri | tojson }},
+        datasets: [{
+          label: 'Value',
+          data: {{ conteggio_generi | tojson }},
+          backgroundColor: [
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(243, 100, 0, 0.5)',
+                    'rgba(159, 157, 131, 0.5)',
+                    'rgba(254, 162, 131, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(243, 100, 0, 1)',
+                    'rgba(159, 157, 131, 1)',
+                    'rgba(254, 162, 131, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+        }]
+      };
+    var pieChart = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true
+        }
+    });
+</script>
+<script>
+    function redirectToCustomPage() {
+        window.location.href = '/custom';
+    }
+</script>
+
+{% endblock %}

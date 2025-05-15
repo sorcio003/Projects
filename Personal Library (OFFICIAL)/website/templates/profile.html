@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{ user.username }}'s Library{% endblock %}
+
+{% block content %}
+
+<style>
+    .div1{
+        background-image: url('https://i.pinimg.com/originals/7e/b1/9f/7eb19fc70911367e43c4fbac8dd26c93.png');
+        height: 350px;
+        width: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+    }
+    #titles{
+        color: black;
+        height: 50px;
+        text-align: center;
+        background-color: rgba(72, 204, 204, 0.74);
+        transition: 2.1s;
+    }
+
+    #titles:hover{
+        color: white;
+        text-align: center;
+        background-color: rgb(5, 85, 151);
+        transition: 2.1s;
+    }
+</style>
+
+<div align="center" class="div1" style="transform: translateY(20px);">
+    <div style="transform: translateY(40px);">
+        <p style="background-color: rgb(57, 152, 230); color: white; font-style:normal; border-radius: 20%; font-size: 42px; font-family: 'Courier New', Courier, monospace; width: min-content; transform: translateY(-20px);">{{ user.username }}</p>
+    </div>
+</div>
+
+<div style="transform: translateY(70px);">
+    <p hidden="true">{{ user.notes }}</p>
+    <h3 id="titles">Libri Aggiunti:</h3>
+
+    <ul id="myul">
+        {% for note in user.notes %}
+        <li>
+            <a class="oggetto" href="/info/{{ note.id}}/{{note.titolo}}" style="text-decoration: none;">{{ note.titolo }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<script>
+    var liList = document.getElementById("myul").getElementsByTagName("li");
+    var titles = document.getElementById("titles")
+    var largo = liList.length
+
+    titles.textContent = 'Libri Aggiunti: '+ largo
+</script>
+{% endblock %}

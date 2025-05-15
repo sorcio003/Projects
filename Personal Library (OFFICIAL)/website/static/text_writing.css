@@ -1,0 +1,36 @@
+@keyframes typing {
+    from {
+      width: 0;
+    }
+  }
+
+  @keyframes blink-caret {
+    50% {
+      border-color: transparent;
+    }
+  }
+  /* When you change the amount of characters in the h1, you have to change
+  the with: 14ch and  steps(14, end), if there is 14 characters, put 14,
+  if there is 20 put 20 */
+  .animation {
+    transition: 0.8s;
+    font: bold 200% Consolas, Monaco, monospace;
+    border-right: .1em solid black;
+    width: 10.20ch;
+    margin: 2em 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-animation: typing 5s steps(10, end),
+                 blink-caret .5s step-end infinite alternate;
+  }
+  .animation_star {
+    transition:5s;
+    font: bold 200% Consolas, Monaco, monospace;
+    border-right: .1em solid black;
+    width: 15.20ch;
+    margin: 2em 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-animation: typing 5s steps(15, end),
+                 blink-caret .5s step-end infinite alternate;
+  }

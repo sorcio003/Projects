@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Personalizzazione{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/input_picker.css">
+
+<form method="POST" id="colorForm">
+  <div style="column-count:2;">
+    <div>
+        <br><br><br>
+        <h3>Light Theme</h3>
+        <div>
+            <label for="theme_light_primary">Primario:</label>
+            <input type="color" id="theme_light_primary" name="theme_light_primary" value="{{theme.theme_light_primary}}">
+            <br>
+            <label for="theme_light_secondary">Secondario:</label>
+            <input type="color" id="theme_light_secondary" name="theme_light_secondary" value="{{theme.theme_light_secondary}}">
+            <br>
+            <label for="theme_light_primary_loading">Caricamento:</label>
+            <input type="color" id="theme_light_primary_loading" name="theme_light_primary_loading" value="{{load_light}}">
+            <br>
+            <label for="theme_light_accent">Accento:</label>
+            <input type="color" id="theme_light_accent" name="theme_light_accent" value="{{theme.theme_light_accent}}">
+            <br>
+            <label for="theme_light_font_color">Colore Testo:</label>
+            <input type="color" id="theme_light_font_color" name="theme_light_font_color" value="{{theme.theme_light_font_color}}">
+            <br>
+            <label for="theme_light_extra">Extra:</label>
+            <input type="color" id="theme_light_extra" name="theme_light_extra" value="{{theme.theme_light_extra}}">
+            <br>
+            <label for="theme_light_font_color_hover">Testo Evidenziato:</label>
+            <input type="color" id="theme_light_font_color_hover" name="theme_light_font_color_hover" value="{{theme.theme_light_font_color_hover}}">
+            <br>
+        </div>
+    </div>
+    <div>
+        <br><br><br>
+        <h3>Dark Theme</h3>
+        <div >
+            <label for="theme_dark_primary">Primario:</label>
+            <input type="color" id="theme_dark_primary" name="theme_dark_primary" value="{{theme.theme_dark_primary}}">
+            <br>
+            <label for="theme_dark_secondary">Secondario:</label>
+            <input type="color" id="theme_dark_secondary" name="theme_dark_secondary" value="{{theme.theme_dark_secondary}}">
+            <br>
+            <label for="theme_dark_primary_loading">Caricamento:</label>
+            <input type="color" id="theme_dark_primary_loading" name="theme_dark_primary_loading" value="{{load_dark}}">
+            <br>
+            <label for="theme_dark_accent">Accento:</label>
+            <input type="color" id="theme_dark_accent" name="theme_dark_accent" value="{{theme.theme_dark_accent}}">
+            <br>
+            <label for="theme_dark_font_color">Colore Testo:</label>
+            <input type="color" id="theme_dark_font_color" name="theme_dark_font_color" value="{{theme.theme_dark_font_color}}">
+            <br>
+            <label for="theme_dark_extra">Extra:</label>
+            <input type="color" id="theme_dark_extra" name="theme_dark_extra" value="{{theme.theme_dark_extra}}">
+            <br>
+            <label for="theme_dark_font_color_hover">Testo Evidenziato:</label>
+            <input type="color" id="theme_dark_font_color_hover" name="theme_dark_font_color_hover" value="{{theme.theme_dark_font_color_hover}}">
+            <br>
+        </div>
+    </div>
+</div>
+  <!-- Repeat for other colors with corresponding checkboxes and color pickers -->
+
+  <br>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Modifica Tema</button>
+      </div>
+</form>
+
+<br><br><br>
+<iframe id="previewFrame" width="100%" height="400px" frameborder="0" src="/preview"></iframe>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const colorForm = document.getElementById('colorForm');
+        const previewFrame = document.getElementById('previewFrame');
+
+        colorForm.addEventListener('input', function() {
+            updatePreview();
+        });
+
+        function updatePreview() {
+            const formData = new FormData(colorForm);
+            const queryParams = new URLSearchParams(formData).toString();
+            const previewUrl = '/preview?' + queryParams;
+            previewFrame.src = previewUrl;
+        }
+    });
+</script>
+
+
+
+{% endblock %}

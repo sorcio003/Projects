@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="static/text_animation.css">
+<link rel="stylesheet" href="static/login.css">
+
+<style>
+  .stitch_book{
+    transform: scale(75%);
+    width: 100%;
+}
+@media (max-width: 450px){
+    .contenitore{
+        transform: translate(-100px, 50%);
+    }
+}
+</style>
+
+<div >
+    <div class="form-container title-login" style="height: 320px;">
+        <form class="form" method="POST">
+            <div>
+                <section>
+                    <div class="content">
+                      <h2>Ohana's Library</h2>
+                      <h2>Ohana's Library</h2>
+                    </div>
+                  </section>
+                  <br><br><br>
+
+                <div class="form__group field ">
+                    <input
+                    type="text"
+                    class="form__field"
+                    id="username"
+                    name="username"
+                    placeholder="Enter username"
+                    required="" />
+                    <label for="username" class="form__label">Username</label>
+                </div>
+                <div class="form__group field ">
+                    <input
+                    type="password"
+                    class="form__field"
+                    id="password"
+                    name="password"
+                    placeholder="Enter password"
+                    required="" />
+                    <label for="password" class="form__label">Password</label>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary submit_button ">Submit</button>
+
+        </form>
+      </div>
+
+</div>
+<br><br><br><br><br><br>
+
+<img width="300px" height="300px" src="/static/avatar/login_1.png" alt="stitch">
+
+
+{% endblock%}

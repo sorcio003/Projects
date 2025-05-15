@@ -1,0 +1,438 @@
+{% extends "base.html" %}
+{% block title %}Ohana's Library{% endblock %}
+
+{% block content %}
+
+<style>
+body{
+  background-color: {{ book.introbg }};
+}
+    .book {
+      transition: 1.0s;
+  transform-style: preserve-3d;
+  position: relative;
+  height: 350px;
+  cursor: pointer;
+  backface-visibility: visible;
+}
+
+.front, .back, .page1, .page2, .page3, .page4, .page5, .page6 {
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 280px;
+  height: 100%;
+  top: 0; left: 0;
+  transform-origin: left center;
+  transition: transform .5s ease-in-out, box-shadow .35s ease-in-out;
+}
+
+.front, .back {
+  background-size: cover;
+  background: navy;
+}
+
+.front, .page1, .page3, .page5 {
+  border-bottom-right-radius: .5em;
+  border-top-right-radius: .5em;
+}
+
+.back, .page2, .page4, .page6 {
+  border-bottom-right-radius: .5em;
+  border-top-right-radius: .5em;
+}
+
+.page1 {
+  background: #efefef;
+}
+
+.page2 {
+  background: #efefef;
+}
+
+.page3 {
+  background: #f5f5f5;
+}
+
+.page4 {
+  background: #f5f5f5;
+}
+
+.page5 {
+  background: #fafafa;
+}
+
+.page6 {
+  background: #fdfdfd;
+}
+
+.book:hover{
+  transition: 1.5s;
+  transform: translateX(135px);
+}
+
+.book:hover .front {
+  transform: rotateY(-160deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page1 {
+  transform: rotateY(-150deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page2 {
+  transform: rotateY(-30deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page3 {
+  transform: rotateY(-140deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page4 {
+  transform: rotateY(-40deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page5 {
+  transform: rotateY(-130deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .page6 {
+  transform: rotateY(-50deg) scale(1.1);
+  box-shadow: 0 1em 3em 0 rgba(0, 0, 0, .2);
+}
+
+.book:hover .back {
+  transform: rotateY(-20deg) scale(1.1);
+}
+
+/*BUBBLE*/
+body,html{
+  width:100%;
+  height: 100%;
+}
+body{
+  margin:0;
+  padding:0;
+}
+.bubbles{
+  position:absolute;
+  width:100%;
+  height: 100%;
+  z-index:0;
+  overflow:hidden;
+  top:0;
+  left:0;
+}
+.bubble{
+  position: absolute;
+  bottom:-100px;
+  width:40px;
+  height: 40px;
+  background:#f1f1f1;
+  border-radius:50%;
+  opacity:0.5;
+  animation: rise 10s infinite ease-in;
+}
+.bubble:nth-child(1){
+  width:40px;
+  height:40px;
+  left:10%;
+  animation-duration:8s;
+}
+.bubble:nth-child(2){
+  width:20px;
+  height:20px;
+  left:20%;
+  animation-duration:5s;
+  animation-delay:1s;
+}
+.bubble:nth-child(3){
+  width:50px;
+  height:50px;
+  left:35%;
+  animation-duration:7s;
+  animation-delay:2s;
+}
+.bubble:nth-child(4){
+  width:80px;
+  height:80px;
+  left:50%;
+  animation-duration:11s;
+  animation-delay:0s;
+}
+.bubble:nth-child(5){
+  width:35px;
+  height:35px;
+  left:55%;
+  animation-duration:6s;
+  animation-delay:1s;
+}
+.bubble:nth-child(6){
+  width:45px;
+  height:45px;
+  left:65%;
+  animation-duration:8s;
+  animation-delay:3s;
+}
+.bubble:nth-child(7){
+  width:90px;
+  height:90px;
+  left:70%;
+  animation-duration:12s;
+  animation-delay:2s;
+}
+.bubble:nth-child(8){
+  width:25px;
+  height:25px;
+  left:80%;
+  animation-duration:6s;
+  animation-delay:2s;
+}
+.bubble:nth-child(9){
+  width:15px;
+  height:15px;
+  left:70%;
+  animation-duration:5s;
+  animation-delay:1s;
+}
+.bubble:nth-child(10){
+  width:90px;
+  height:90px;
+  left:25%;
+  animation-duration:10s;
+  animation-delay:4s;
+}
+@keyframes rise{
+  0%{
+    bottom:-100px;
+    transform:translateX(0);
+  }
+  50%{
+    transform:translate(100px);
+  }
+  100%{
+    bottom:1080px;
+    transform:translateX(-200px);
+  }
+}
+</style>
+
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+
+
+
+<div class="m-5" align="center" >
+    <form method="post" class="m.5" >
+      <div class="book"style="width:250px; height:430px;" >
+        <div class="back" style="background-color: {{book.mobilebg}};"></div>
+        <div class="page6" >
+
+          <div style="padding: 20px; ">
+            <strong style="color: {{book.fontcolor}}; font-family: fantasy; font-size:8px;">Trama: </strong>
+            <p  style="font-size:8px;">{{book.trama}}</p>
+          </div>
+
+          <div style="padding: 20px; ">
+            <strong style="color: {{book.fontcolor}}; font-family: fantasy; font-size:8px;">Recensione: </strong>
+            <p  style="font-size:8px;">{{book.review}}</p>
+          </div>
+
+        </div>
+        <div class="page5">
+          <div style="transform: scale(-1,1); ">
+              <p style="color: {{book.fontcolor}}; padding: 20px; font-family: fantasy; font-size:8px;">{{book.titolo}} -- by {{book.autore}}</p>
+              <div style="padding: 20px; transform: translateY(-50px);">
+                  <li style="color: {{book.fontcolor}}; font-family: fantasy; list-style: none; font-size:8px;" class="voto" id="valutation-1" value="{{ book.valutazione }}">Voto:</li>
+
+                  <li style="color: {{book.fontcolor}}; font-family: fantasy; list-style: none; font-size:8px;"  class="piccante" id="Spicy-1" value="{{ book.spicy }}">Spicy:</li>
+
+                  <li style="color: {{book.fontcolor}}; font-family: fantasy; list-style: none; font-size:8px;" class="pianto" id="Lacrime-1" value="{{ book.lacrime }}">Lacrime:</li>
+              </div>
+
+
+              <div style="padding: 20px; transform: translateY(-90px);">
+                <strong style="color: {{book.fontcolor}}; font-family: fantasy; font-size:8px;">Genere: </strong>
+                <p  style="font-size:8px;">{{book.genere}}</p>
+              </div>
+
+              <div style="padding: 20px; transform: translateY(-150px);">
+                <strong style="color: {{book.fontcolor}}; font-family: fantasy; font-size:8px;">Frase Preferita:</strong>
+                <p style="font-size:8px;">{{book.best_Phrase}}</p>
+              </div>
+
+              <div style="padding: 20px; transform: translateY(-200px);">
+                <strong style="color: {{book.fontcolor}}; font-family: fantasy; font-size:8px;">Scena Preferita:</strong>
+                <p style="font-size:8px;">{{book.favourite_Scene}}</p>
+              </div>
+
+              <div style="columns: 2; transform: translateY(-250px);">
+                <div style="padding: 20px;">
+                <strong style="color: {{book.fontcolor}}; font-family: fantasy;font-size:8px;">Data di Inizio:</strong>
+                <p style="font-size:8px;">{{book.date_start}}</p>
+                </div>
+
+                <div style="padding: 20px;">
+                  <strong style="color: {{book.fontcolor}}; font-family: fantasy; font-size:8px;">Data di Fine:</strong>
+                  <p style="font-size:8px;">{{book.date_end}}</p>
+                </div>
+              </div>
+
+              <div style="columns: 2; transform: translateY(-280px);">
+                  <div style="padding: 20px;">
+                    <strong style="color: {{book.fontcolor}}; font-family: fantasy; font-size:8px;">Personaggio Preferito:</strong>
+                    <p style="font-size:8px;">{{book.favourite_Charac}}</p>
+                  </div>
+
+                  <div style="padding: 20px;">
+                    <strong style="color: {{book.fontcolor}}; font-family: fantasy; font-size:8px;">Personaggio Odiato:</strong>
+                    <p  style="font-size:8px;">{{book.hated_Charac}}</p>
+                  </div>
+              </div>
+
+          </div>
+
+
+        </div>
+        <div class="page4"></div>
+        <div class="page3"></div>
+        <div class="page2"></div>
+        <div class="page1"></div>
+        <div class="front" style="background-image: url('{{book.url_cover}}'); background-size: cover;"></div>
+      </div>
+    </form>
+  </div>
+  <br><br><br><br><br><br><br><br><br>
+
+<script>
+
+var votation = document.getElementsByClassName("voto");
+var spicy = document.getElementsByClassName("piccante");
+var Lacrime = document.getElementsByClassName("pianto");
+
+for (let i = 0; i < votation.length; i++) {
+votation[i].id = "valutation-" + (i);
+}
+for (let i = 0; i < spicy.length; i++) {
+spicy[i].id = "Spicy-" + (i);
+}
+for (let i = 0; i < Lacrime.length; i++) {
+Lacrime[i].id = "Lacrime-" + (i);
+}
+
+for (let i = 0; i < votation.length; i++) {
+var vote = document.getElementById('valutation-' + i)
+var votazione = vote.value
+
+for (let x = 0; x < votazione ; x++){
+  const star = document.createTextNode("⭐")
+  vote.appendChild(star)
+}
+}
+
+for (let i = 0; i < spicy.length; i++) {
+var hot = document.getElementById('Spicy-' + i)
+var piccante = hot.value
+
+for (let x = 0; x < piccante ; x++){
+  const star = document.createTextNode("🌶️")
+  hot.appendChild(star)
+}
+}
+
+for (let i = 0; i < Lacrime.length; i++) {
+var goccia = document.getElementById('Lacrime-' + i)
+var pianto = goccia.value
+
+for (let x = 0; x < pianto ; x++){
+  const star = document.createTextNode("💧")
+  goccia.appendChild(star)
+}
+}
+
+
+</script>
+
+<script>
+var pages = document.getElementsByClassName('page');
+for(var i = 0; i < pages.length; i++)
+{
+  var page = pages[i];
+  if (i % 2 === 0)
+    {
+      page.style.zIndex = (pages.length - i);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+for(var i = 0; i < pages.length; i++)
+  {
+    //Or var page = pages[i];
+    pages[i].pageNum = i + 1;
+    pages[i].onclick=function()
+      {
+        if (this.pageNum % 2 === 0)
+          {
+            this.classList.remove('flipped');
+            this.previousElementSibling.classList.remove('flipped');
+          }
+        else
+          {
+            this.classList.add('flipped');
+            this.nextElementSibling.classList.add('flipped');
+          }
+       }
+    }
+})
+</script>
+
+<script>
+
+var votation = document.getElementsByClassName("voto");
+var spicy = document.getElementsByClassName("piccante");
+var Lacrime = document.getElementsByClassName("pianto");
+
+for (let i = 0; i < votation.length; i++) {
+var vote = document.getElementById('valutation-1')
+var votazione = vote.value
+
+for (let x = 0; x < votazione ; x++){
+  const star = document.createTextNode("⭐")
+  vote.appendChild(star)
+}
+}
+
+for (let i = 0; i < spicy.length; i++) {
+var hot = document.getElementById('Spicy-1')
+var piccante = hot.value
+
+for (let x = 0; x < piccante ; x++){
+  const star = document.createTextNode("🌶️")
+  hot.appendChild(star)
+}
+}
+
+for (let i = 0; i < Lacrime.length; i++) {
+var goccia = document.getElementById('Lacrime-1' )
+var pianto = goccia.value
+
+for (let x = 0; x < pianto ; x++){
+  const star = document.createTextNode("💧")
+  goccia.appendChild(star)
+}
+}
+</script>
+
+{% endblock %}

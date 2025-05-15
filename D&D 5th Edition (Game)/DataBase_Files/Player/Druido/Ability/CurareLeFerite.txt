@@ -1,0 +1,15 @@
+ID: 2 ;
+
+Nome: Curare_Le_Ferite ;
+
+Type: Recover_Heal ;
+
+Description: "Questo Trucchetto del Druido gli concede l'abilita' unica di curarsi le ferite in Battaglia" ; 
+
+HowToUse: "Tiro sulla CD (8 + bonus comp. + 1d6), se superato la vita recuperato equivale al tiro del dado vita del Player" ; 
+
+Cost: 5 ;
+Level: 0 ;
+Danno: 0 ;
+
+"Il Damage Viene calcolato in Battaglia";

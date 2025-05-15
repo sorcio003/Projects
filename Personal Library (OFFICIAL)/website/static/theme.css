@@ -1,0 +1,20 @@
+    image{
+        content: url(--image);
+    }
+
+    .theme-light {
+    --color-primary: rgb(167, 27, 27);
+    --color-primary-loading: rgba(167, 27, 27, 0.7);
+    --color-secondary: #fbfbfe;
+    --color-accent: #fd6f53;
+    --font-color: #000000;
+    --image: "https://www.pngall.com/wp-content/uploads/12/Disney-Lilo-And-Stitch-PNG-File.png"
+    }
+    .theme-dark {
+    --color-primary: rgb(63, 8, 8);
+    --color-primary-loading: rgba(63, 8, 8, 0.7);
+    --color-secondary: #243133;
+    --color-accent: #82200c;
+    --font-color: #ffffff;
+    --image: "https://www.pngmart.com/files/17/Toothless-Night-Fury-PNG-File.png"
+    }

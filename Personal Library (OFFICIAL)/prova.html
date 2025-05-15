@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(window).on('load',function(){
+$("#div1").fadeOut("slow");
+
+});
+</script>
+</head>
+<style>
+    .loader-wrapper {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #242f3f;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .loader {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        position: relative;
+        border: 4px solid #Fff;
+        animation: loader 2s infinite ease;
+      }
+      .loader-inner {
+        vertical-align: top;
+        display: inline-block;
+        width: 100%;
+        background-color: #fff;
+        animation: loader-inner 2s infinite ease-in;
+      }
+      
+      @keyframes loader {
+        0% { transform: rotate(0deg);}
+        25% { transform: rotate(180deg);}
+        50% { transform: rotate(180deg);}
+        75% { transform: rotate(360deg);}
+        100% { transform: rotate(360deg);}
+      }
+      
+      @keyframes loader-inner {
+        0% { height: 0%;}
+        25% { height: 0%;}
+        50% { height: 100%;}
+        75% { height: 100%;}
+        100% { height: 0%;}
+      }
+</style>
+<body>
+
+<p>Demonstrate fadeIn() with different parameters.</p>
+
+<button>Click to fade in boxes</button><br><br>
+
+<div class="loader-wrapper" id="div1">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
+<div id="div2" style="width:80px;height:80px;display:none;background-color:green;"></div><br>
+<div id="div3" style="width:80px;height:80px;display:none;background-color:blue;"></div>
+
+</body>
+</html>

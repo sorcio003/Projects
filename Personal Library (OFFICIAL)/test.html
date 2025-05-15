@@ -1,0 +1,105 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+    <input type="text" id="input">
+    <button onclick="getbooks()">Search</button>
+    <br>
+    <br><br><br><br><br><br><br>
+    <div class='container' align="center">
+      <div  class='list flex-column ' style="width: 700px;" >
+        <div id="output">
+          <div class='card flex-row'>
+            <img src='http://i.harperapps.com/covers/9780008108298/y450-293.jpg' class='book'>
+            <div class='flex-column info'>
+              <div class='title'>The Fellowship of the Ring</div>
+              <div class='author'>J.R.R. Tolkien</div>
+              <div class='hidden bottom summary'>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod ratione impedit temporibus maiores autem aperiam assumenda exercitationem, quisquam nobis esse.
+              </div>
+            </div>
+            <div class='flex-column group'>
+              <div class='members'>
+                <span class='current'>14</span> /
+                <span class='max'>30</span>
+              </div>
+              <div class='hidden bottom' style="transform:translate(-45px,0%);">
+                <button class='simple'>Join</button>
+              </div>
+            </div>
+          </div>          
+        </div>
+
+      </div>
+    </div>
+
+</body>
+<!--
+<script>
+    function getbooks(){
+        document.getElementById('output').innerHTML="";
+        fetch("http://openlibrary.org/search.json?q="
+        +document.getElementById('input').value)
+        .then(a => a.json())
+        .then(response => {
+            for(var i=0; i<10; i++){
+                document.getElementById('output').innerHTML
+                +="<h2>"+response.docs[i].title+"</h2>"
+                +response.docs[i].author_name[0]+
+                "<br><img src='http://covers.openlibrary.org/b/isbn/"
+                +response.docs[i].isbn[0]+"-M.jpg'><br>";
+            }
+    });
+    }
+</script>
+-->
+
+<script>
+  function getbooks(){
+    let Libri = []
+    var i = 0;
+    var j = 27;
+    document.getElementById('output').innerHTML = "";
+      fetch("http://openlibrary.org/search.json?q="
+      +document.getElementById('input').value)
+      .then(a => a.json())
+      .then(response => {
+          while(response != null){
+            var k = j;
+            while(response.docs[i].isbn[k] == null){
+              k--;
+            }
+            document.getElementById('output').innerHTML += "<div class=\"card flex-row\">"
+                //image
+              +"<img src=\"https://covers.openlibrary.org/b/isbn/"
+              +response.docs[i].isbn[k]+"-M.jpg\" class=\"book\">"
+              +"<div class=\"flex-column info\">"
+              +"<div class=\"title\">"+response.docs[i].title+"</div>"
+              +"<div class=\"author\">"+response.docs[i].author_name[0]+"</div></div>"
+              +"<div class=\"flex-column group\">"
+              +"<div class=\"members\">"
+              +"<span class=\"current\">14</span> / <span class=\"max\">30</span>"
+              +"</div><div class=\"hidden bottom\" style=\"transform:translate(-45px,0%);\"><button class=\"simple\">Add</button></div></div></div>";
+              i++;
+          }
+  });
+  }
+
+  let old = $('.card').get(0);
+  $('.card').click(function(){
+    if(old!=null && $(old).hasClass('open'))
+      $(old).toggleClass('open');
+     $(this).toggleClass('open');
+     old = this;
+  
+  })
+</script>
+
+
+</html>

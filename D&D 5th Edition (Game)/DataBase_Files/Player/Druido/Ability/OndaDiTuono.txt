@@ -1,0 +1,15 @@
+ID: 3 ;
+
+Nome: Onda_Di_Tuono ;
+
+Type: Magic ;
+
+Description: "A Livello 1, il Drudio ha la capacita' di controllare il potere dei fulmini e delle Tempeste scagliando un potente Tuono contro l'avversario" ;
+
+HowToUse: "Il Danno e' Calcolato con un Il modificatore Competenza + il risultato del dado D6, BISOGNA SUPERARE IL TIRO SULLA CD (CALCOLATO SU 8 + Bonus comp. + d6)" ;
+
+Cost: 3 ;
+Level: 0 ;
+Danno: 0 ;
+
+"Il Damage Viene calcolato in Battaglia";

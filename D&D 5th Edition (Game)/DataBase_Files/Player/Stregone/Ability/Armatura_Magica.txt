@@ -1,0 +1,15 @@
+ID: 2 ;
+
+Nome: Armatura_Magica ;
+
+Type: Abiurazione ;
+
+Description: L'incantatore tocca una creatura consenziente che non indossi un'armatura, e una forza magica protettiva circonda quella creatura finch‚ l'incantesimo non termina. La CA base del bersaglio diventa 13 + il suo modificatore di Destrezza. L'incantesimo termina se il bersaglio indossa un'armatura o se l'incantatore interrompe l'incantesimo con un'azione. ; 
+
+HowToUse: Il Giocatore Crea un CA pari a 13 + il suo modificatore di Destrezza (per la beta il bonus competenza) e la magia non verra' interrotta per 3 turni ; 
+
+Cost: 3 ;
+Level: 0 ;
+Danno: 0 ;
+
+"Il Damage Viene calcolato in Battaglia";

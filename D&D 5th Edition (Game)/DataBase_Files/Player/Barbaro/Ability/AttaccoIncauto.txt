@@ -1,0 +1,16 @@
+ID: 3 ;
+
+Nome: Attacco_Incauto ;
+
+Type: Normal ;
+
+Description: "Durante la Battaglia, Il Barbaro pu' dimostrare grande forza e tenacia lanciandosi contro il nemico a piena potenza completamente scoperto da attacchi improvvisi" ;
+
+HowToUse: "E' una azione Bonus che costa 5 tacche di Stamina, l'ATK del giocatore non e' piu' dimezzato , ma la sua armatura diminuisce di meta' del suo ATK" ;
+
+Cost: 5 ;
+Level: 5 ;
+Danno: 0 ;
+
+"Il Damage Viene calcolato in Battaglia";
+

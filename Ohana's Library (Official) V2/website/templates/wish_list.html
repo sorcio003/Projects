@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+{% block title %}Wish List{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/wish.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<style>
+  .input_1 {
+    width: 70%;
+    height: 40px;
+    line-height: 28px;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f3f3f4;
+    color: #0d0c22;
+    transition: .3s ease;
+   }
+
+   .input_1::placeholder {
+    color: #9e9ea7;
+   }
+
+   .input_1:focus, .input_1:hover {
+    outline: none;
+    border-color: rgba(234,76,137,0.4);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+   }
+</style>
+<div>
+    <br><br><br>
+</div>
+
+<div class='container input-book-opened' align="center">
+    <div  class='list flex-column ' style="width: 700px;" >
+        <form method="post" class="m.5">
+            <div id="output">
+                <input type="hidden" class="form-control" name="tipo"
+                value="libro" required></input>
+                <div class='carta flex-row open'>
+                    <div class="form-group book-input book">
+                        <label for="url_cover">Cover</label>
+                        <input type="text" class="form-control" name="url_cover"
+                        placeholder="URL Code" value="{{ user.url_cover }}" required></input>
+                    </div>
+                <div class='flex-column info'>
+                    <div class="form-group titles">
+                        <label for="titolo" style="color: var(--font-color);">Titolo</label>
+                        <input type="text" class="form-control" name="titolo"
+                        placeholder="Inserisci un Titolo" value="{{ user.titolo }}" required></input>
+                        </div>
+                        <div class="form-group titles" >
+                            <label for="autore" style="color: var(--font-color);">Autore</label>
+                            <input type="text" class="form-control" name="autore"
+                            placeholder="Inserisci un Autore" value="{{ user.autore }}" required></input>
+                        </div>
+                    <div class='hidden bottom summary'>
+                        <div class="form-group titles" style="width: 50px; text-align:center; color: var(--font-color);">
+                            <label for="costo"><strong>Costo</strong></label>
+                              <input type="text" class="form-control" name="costo"
+                               value="{{ user.costo }}" required></input>
+                            </div>
+                    </div>
+                </div>
+                    <div class='hidden bottom' style="transform:translate(50px,0%);">
+                        <div class="form-group simple">
+                            <button type="submit" class="btn btn-primary">ADD</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+  <div class="traslato" align="center">
+  <div >
+    <div style="position:relative; align-items: center;">
+      <input class="input_1" id="searchInput" type="search" placeholder="Search" />
+
+    </div>
+  </div>
+</div>
+
+
+<br>
+
+<div align="center">
+    <button class="btn btn-primary" id="libriButton">Libri</button>
+    <button class="btn btn-primary" id="filmButton">Film</button>
+    <button class="btn btn-primary" id="seriesButton">Tv Series</button>
+</div>
+
+<br>
+
+{% if not wish_list_notes %}
+<div align="center">
+    <h1 style="color:var(--color-primary); ">Wish List vuota</h1>
+    <img src="https://png.pngtree.com/png-vector/20221127/ourmid/pngtree-black-torn-cobweb-spider-web-net-cartoon-on-transparent-background-png-image_6474363.png" alt="web">
+</div>
+{% endif %}
+
+{% for note in wish_list_notes %}
+
+<div class='container responsive' align="center">
+    <p style="display:none;" class="type">{{note.tipo}}</p>
+    <div class='list flex-column ' style="width: 620px;" >
+      <div id="output">
+        <div class='card flex-row'>
+          <img src='{{note.url_cover}}' class='book'>
+          <div class='flex-column info'>
+            <div class='titles' style="width:70%;">{{note.titolo}}</div>
+            <div class='author' style="width:80%;">{{note.autore}}</div>
+            <div class='hidden bottom summary'>
+
+            </div>
+          </div>
+          <div class='flex-column group' style="transform:translate(-80px,0%);">
+            <div class='members'>
+            {% if note.tipo == "libro" %}
+              <span class='current' style="color: var(--font-color);">Costo</span> /
+              <span class='max' style="color: var(--font-color);">{{note.costo}} €</span>
+            {% else %}
+              <span class='current' style="color: var(--font-color);">Voto</span>:
+              <span class='max' style="color: var(--font-color);">{{note.costo}} / 10</span>
+            {% endif %}
+            </div>
+            <div class='hidden bottom' style="transform:translate(-70px,0%);">
+
+              <button onClick="deleteWish_List({{ note.id }})" style="transform:translate(20px,0%);" class="btn btn-danger btn-sm">Delete</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div>
+
+{% endfor %}
+
+
+<div>
+    <br><br><br>
+</div>
+
+<script>
+$(document).ready(function() {
+    // Nascondi tutte le note tranne quelle di tipo "libro" quando la pagina viene caricata
+    $('.container.responsive').hide();
+    $('.container.responsive').each(function() {
+        if ($(this).find('.type').text() === 'libro') {
+            $(this).show();
+        }
+    });
+
+    // Mostra solo le note di tipo libro quando il pulsante "Libri" viene cliccato
+    $('#libriButton').click(function() {
+        $('.container.responsive').hide(); // Nasconde tutte le note
+        $('.container.responsive').each(function() {
+            if ($(this).find('.type').text() === 'libro') {
+                $(this).show(); // Mostra solo le note di tipo libro
+            }
+        });
+    });
+
+    // Mostra solo le note di tipo film quando il pulsante "Film" viene cliccato
+    $('#filmButton').click(function() {
+        $('.container.responsive').hide(); // Nasconde tutte le note
+        $('.container.responsive').each(function() {
+            if ($(this).find('.type').text() === 'film') {
+                $(this).show(); // Mostra solo le note di tipo film
+            }
+        });
+    });
+
+    // Mostra solo le note di tipo serieTv quando il pulsante "SerieTv" viene cliccato
+    $('#seriesButton').click(function() {
+        $('.container.responsive').hide(); // Nasconde tutte le note
+        $('.container.responsive').each(function() {
+            if ($(this).find('.type').text() === 'serieTv') {
+                $(this).show(); // Mostra solo le note di tipo serieTv
+            }
+        });
+    });
+});
+
+  $(document).ready(function() {
+    $('#searchInput').on('input', function() {
+        var searchText = $(this).val().toLowerCase();
+        $('.card').each(function() {
+            var bookTitle = $(this).find('.titles').text().toLowerCase();
+            var authorName = $(this).find('.author').text().toLowerCase();
+            if (bookTitle.includes(searchText) || authorName.includes(searchText)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
+
+    let old = $('.card').get(0);
+    $('.card').click(function(){
+      if(old!=null && $(old).hasClass('open'))
+        $(old).toggleClass('open');
+        $(old).find('.author').css('top', '0px');
+        $(old).find('.author').css('position', 'null');
+       $(this).toggleClass('open');
+       $(this).find('.author').css('top', '20px');
+       $(this).find('.author').css('position', 'relative');
+       old = this;
+    });
+
+  });
+
+
+</script>
+
+{% endblock %}

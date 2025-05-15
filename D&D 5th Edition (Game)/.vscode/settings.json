@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "myfunction.h": "c",
+        "struct.h": "c",
+        "dndfunction.h": "c",
+        "display.h": "c"
+    }
+}

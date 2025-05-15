@@ -1,0 +1,9 @@
+@import url("theme.css");
+
+.bg-brown{
+    background-color:  var(--color-primary);
+}
+
+.custom_navbar{
+
+}

@@ -1,0 +1,841 @@
+{% extends "base.html" %}
+{% block title %}Ohana's Library{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="static/home.css">
+<link rel="stylesheet" href="static/text_writing.css">
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+
+<style>
+  #searchResults {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .result-search {
+    width: 200px;
+    height: 350px;
+    background-color: violet;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    font-size:small;
+    background-color: var(--color-accent);
+    box-sizing: border-box;
+  }
+
+  .result-search img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .result-search h3, .result-search p {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .result-search button {
+    display: block;
+    margin: 0 auto;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .book button:hover {
+    background-color: #0056b3;
+  }
+  @media(max-width:600px){
+    .result-search{
+      width: 150px;
+    height: 350px;
+
+    }
+    h6{
+        font-size:small;
+    }
+    p{
+        font-size:small;
+    }
+
+  }
+</style>
+
+<style>
+  .coolinput {
+    display: flex;
+    flex-direction: column;
+
+    position: static;
+    max-width: 300px;
+  }
+
+  .coolinput label.text {
+    font-size: 0.75rem;
+    color: #818CF8;
+    font-weight: 700;
+    position: relative;
+    top: 0.5rem;
+    margin: 0 0 0 7px;
+    padding: 0 3px;
+    background: white;
+    width: fit-content;
+  }
+
+  .coolinput input[type=text].input {
+    padding: 11px 10px;
+    font-size: 0.75rem;
+    border: 2px #818CF8 solid;
+    border-radius: 5px;
+    background: white;
+  }
+
+  .coolinput input[type=text].input:focus {
+    outline: none;
+  }
+</style>
+
+<style>
+.trama-desc{
+  background-color: black;
+  opacity:0.6; color: white;
+  padding: 20px;
+  width: calc(100% - 240px);
+  overflow-y: auto;
+}
+
+@media (max-width: 600px) {
+  .trama-desc {
+      width: 100%; /* Adatta la larghezza quando lo schermo è più piccolo */
+      font-size:6px;
+      position: absolute;
+      top: auto; /* Imposta il posizionamento iniziale a 'auto' */
+            bottom: -20px; /* Posiziona la trama sotto l'immagine di copertina */
+            left: 0;
+            width: 100%; /* Imposta la larghezza al 100% */
+            height: auto;
+
+  }
+  .carousel-immagine-cover{
+    transform:translateY(-110px);
+  }
+}
+</style>
+
+    <br>
+    <p style="display:none;"class="genere-amato">{{genere}}</p>
+    <h1 style="text-align: center;">Welcome To <h1 class="title">'s Library</h1></h1>
+
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6" aria-label="Slide 7"></button>
+      </div>
+      <div id="carousel-inner" class="carousel-inner">
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden" style="color:black;">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden" style="color:black;">Next</span>
+      </button>
+    </div>
+
+<div align="center">
+<div class="coolinput" align="center">
+      <label for="input" class="text">Search:</label>
+      <input type="text" id="searchInput" class="input" placeholder="Cerca per titolo o autore" value="">
+    </div>
+</div>
+<br>
+<div align="center">
+    <button class="btn btn-primary" id="libriButton">Libri</button>
+    <button class="btn btn-primary" id="filmButton">Film</button>
+    <button class="btn btn-primary" id="seriesButton">Tv Series</button>
+</div>
+<div align="center">
+<div >
+    <div id="searchResults" align="center"></div>
+</div>
+</div>
+    <br><br><br>
+
+<script>
+      const genereAmato = document.querySelector('.genere-amato').textContent;
+
+      var libri_clicked = true;
+      var movie_clicked = false;
+      var series_clicked = false;
+
+      document.getElementById("libriButton").addEventListener("click", function() {
+        if (genereAmato == 'None') {
+          loadRandomBooks();
+          loadBooksIntoCarousel();
+        }
+        else{
+          loadRandomBooksfromGenre(genereAmato);
+          loadBooksIntoCarouselGenre(genereAmato);
+        }
+        libri_clicked = true;
+        movie_clicked = false;
+        series_clicked = false;
+      });
+
+      // Event listener per il bottone "Film"
+      document.getElementById("filmButton").addEventListener("click", function() {
+        loadRandomMovie();
+        loadMoviesIntoCarousel();
+        libri_clicked = false;
+        movie_clicked = true;
+        series_clicked = false;
+      });
+
+      document.getElementById("seriesButton").addEventListener("click", function() {
+        loadTVShowsIntoCarousel();
+        loadRandomTVShow();
+        libri_clicked = false;
+        movie_clicked = false;
+        series_clicked = true;
+      });
+
+
+
+      function truncateDescription(description) {
+        const maxWords = 50;
+        // Split della descrizione in parole
+        const words = description.split(/\s+/);
+        if (words.length > maxWords) {
+            // Se la lunghezza supera il limite, tronca la descrizione
+            return words.slice(0, maxWords).join(" ") + ".....more info";
+        } else {
+            // Altrimenti, restituisci la descrizione originale
+            return description;
+        }
+    }
+
+
+      function loadRandomBooks() {
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=genre:young+adult&orderBy=newest&maxResults=20&printType=books&printType=magazines`)
+          .then(response => response.json())
+          .then(data => {
+            const searchResultsDiv = document.getElementById("searchResults");
+            let index = 0;
+            searchResultsDiv.innerHTML = "";
+            data.items.forEach(book => {
+              const title = book.volumeInfo.title;
+              const authors = book.volumeInfo.authors && book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors.shift() : "Sconosciuto";
+              const thumbnail = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "Placeholder per copertina";
+              const price = book.saleInfo.listPrice ? book.saleInfo.listPrice.amount : "Prezzo non disponibile";
+              const description = book.volumeInfo.description ? book.volumeInfo.description : "Trama non disponibile";
+              const averageRating = book.volumeInfo.averageRating ? book.volumeInfo.averageRating : "Recensione non disponibile";
+              const previewLink = book.volumeInfo.infoLink || "#";
+
+              const bookDiv = document.createElement("div");
+              bookDiv.classList.add("result-search");
+              bookDiv.innerHTML = `
+                <form id="form_${index}" method="post" class="m.5">
+                  <input type="hidden" name="form_id" value="${index}">
+                  <input type="hidden" name="url_cover" value="${thumbnail}">
+                  <input type="hidden" name="titolo" value="${title}">
+                  <input type="hidden" name="autore" value="${authors}">
+                  <input type="hidden" name="costo" value="${price}">
+                  <input type="hidden" name="trama" value="${description}">
+                  <input type="hidden" name="voto" value="${averageRating}">
+                  <input type="hidden" name="preview" value="${previewLink}">
+                  <input type="hidden" name="type" value="libro">
+                  <input type="hidden" name="attori" value="none">
+                  <input type="hidden" name="Fotoattori" value="none">
+                  <input type="hidden" name="character" value="none">
+                  <img src="${thumbnail}"  alt="${title}" >
+                  <h6 name="titolo" >${title}</h6>
+                  <p name="autore">Autore: ${authors}</p>
+                  <p>Prezzo: ${price} €</p>
+                  <button type="submit" >Info</button>
+                </form>
+              `;
+              searchResultsDiv.appendChild(bookDiv);
+              index ++;
+            });
+          })
+          .catch(error => console.error('Errore durante il caricamento dei libri casuali:', error));
+      }
+
+      function loadRandomBooksfromGenre(genereAmato) {
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(genereAmato)}&maxResults=20&orderBy=newest&printType=books&printType=magazines`)
+          .then(response => response.json())
+          .then(data => {
+            const searchResultsDiv = document.getElementById("searchResults");
+            let index = 0;
+            searchResultsDiv.innerHTML = "";
+            data.items.forEach(book => {
+              const title = book.volumeInfo.title;
+              const authors = book.volumeInfo.authors && book.volumeInfo.authors.length > 0 ? book.volumeInfo.authors.shift() : "Sconosciuto";
+              const thumbnail = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "Placeholder per copertina";
+              const price = book.saleInfo.listPrice ? book.saleInfo.listPrice.amount : "Prezzo non disponibile";
+              const description = book.volumeInfo.description ? book.volumeInfo.description : "Trama non disponibile";
+              const averageRating = book.volumeInfo.averageRating ? book.volumeInfo.averageRating : "Recensione non disponibile";
+              const previewLink = book.volumeInfo.infoLink || "#";
+
+              const bookDiv = document.createElement("div");
+              bookDiv.classList.add("result-search");
+              bookDiv.innerHTML = `
+                <form id="form_${index}" method="post" class="m.5">
+                  <input type="hidden" name="form_id" value="${index}">
+                  <input type="hidden" name="url_cover" value="${thumbnail}">
+                  <input type="hidden" name="titolo" value="${title}">
+                  <input type="hidden" name="autore" value="${authors}">
+                  <input type="hidden" name="costo" value="${price}">
+                  <input type="hidden" name="trama" value="${description}">
+                  <input type="hidden" name="voto" value="${averageRating}">
+                  <input type="hidden" name="preview" value="${previewLink}">
+                  <input type="hidden" name="type" value="libro">
+                  <input type="hidden" name="attori" value="none">
+                  <input type="hidden" name="Fotoattori" value="none">
+                  <input type="hidden" name="character" valie="none">
+                  <img src="${thumbnail}"  alt="${title}" >
+                  <h6 name="titolo" >${title}</h6>
+                  <p name="autore">Autore: ${authors}</p>
+                  <p>Prezzo: ${price} €</p>
+                  <button type="submit" >Info</button>
+                </form>
+              `;
+              searchResultsDiv.appendChild(bookDiv);
+              index ++;
+            });
+          })
+          .catch(error => console.error('Errore durante il caricamento dei libri casuali:', error));
+      }
+
+      function loadBooksIntoCarousel() {
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=genre:young+adult&orderBy=newest&maxResults=7&printType=books&printType=magazines`)
+          .then(response => response.json())
+          .then(data => {
+            const carouselInner = document.querySelector(".carousel-inner");
+
+            // Rimuovi i vecchi libri dal carousel
+            carouselInner.innerHTML = "";
+
+            // Aggiungi i nuovi libri al carousel
+            data.items.forEach((book, index) => {
+              const title = book.volumeInfo.title;
+              const thumbnail = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "Placeholder per copertina";
+
+              const description = book.volumeInfo.description ? book.volumeInfo.description : "Trama non disponibile";
+
+              const truncatedDescription = truncateDescription(description);
+
+              const thumbnailImage = new Image();
+              thumbnailImage.src = thumbnail;
+              thumbnailImage.onload = function() {
+                  const thumbnailWidth = thumbnailImage.width;
+                  const carouselCaption = document.getElementById('carouselCaption');
+                  carouselCaption.style.width = `calc(100% - ${thumbnailWidth}px)`;
+              };
+
+              const carouselItem = document.createElement("div");
+              carouselItem.classList.add("carousel-item");
+              if (index === 0) {
+                carouselItem.classList.add("active");
+              }
+              carouselItem.innerHTML = `
+              <div style="position: relative;  height: 563px;">
+                  <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-image: url(${thumbnail}); background-size: cover; background-position: center; opacity: 0.5;"></div>
+                  <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                      <img class="carousel-immagine-cover"src="${thumbnail}" alt="${title}" style="width: 200px; height: auto; margin-right: 20px;">
+                      <div class="trama-desc">
+                          <h5>${title}</h5>
+                          <p >${truncatedDescription}</p>
+                      </div>
+                  </div>
+              </div>
+          `;
+
+              carouselInner.appendChild(carouselItem);
+            });
+          })
+          .catch(error => console.error('Errore durante il caricamento dei libri:', error));
+      }
+
+      function loadBooksIntoCarouselGenre(genereAmato) {
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(genereAmato)}&orderBy=newest&maxResults=7&printType=books&printType=magazines`)
+          .then(response => response.json())
+          .then(data => {
+            const carouselInner = document.querySelector(".carousel-inner");
+
+            // Rimuovi i vecchi libri dal carousel
+            carouselInner.innerHTML = "";
+
+            // Aggiungi i nuovi libri al carousel
+            data.items.forEach((book, index) => {
+              const title = book.volumeInfo.title;
+              const thumbnail = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "Placeholder per copertina";
+
+              const description = book.volumeInfo.description ? book.volumeInfo.description : "Trama non disponibile";
+
+              const truncatedDescription = truncateDescription(description);
+
+              const thumbnailImage = new Image();
+              thumbnailImage.src = thumbnail;
+              thumbnailImage.onload = function() {
+                  const thumbnailWidth = thumbnailImage.width;
+                  const carouselCaption = document.getElementById('carouselCaption');
+                  carouselCaption.style.width = `calc(100% - ${thumbnailWidth}px)`;
+              };
+
+              const carouselItem = document.createElement("div");
+              carouselItem.classList.add("carousel-item");
+              if (index === 0) {
+                carouselItem.classList.add("active");
+              }
+              carouselItem.innerHTML = `
+              <div style="position: relative; height: 563px;">
+                <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-image: url(${thumbnail}); background-size: cover; background-position: center; opacity: 0.5;"></div>
+                <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <img class="carousel-immagine-cover" src="${thumbnail}" alt="${title}" style="width: 200px; height: auto; margin-right: 20px;">
+                    <div class="trama-desc" > <!-- Adatta la larghezza quando lo schermo è più grande -->
+                        <h5>${title}</h5>
+                        <p>${truncatedDescription}</p>
+                    </div>
+                </div>
+            </div>
+          `;
+
+              carouselInner.appendChild(carouselItem);
+            });
+          })
+          .catch(error => console.error('Errore durante il caricamento dei libri:', error));
+      }
+
+      function loadMoviesIntoCarousel() {
+        const genreMap = {
+          "Azione": 28,
+          "Avventura": 12,
+          "Animazione": 16,
+          // Aggiungi altri generi secondo necessità
+        };
+
+         // Sostituisci con il nome del genere desiderato
+         const genreName = "Azione";
+        const genreId = genreMap[genreName];
+        const apiKey = "96059f6ee5cfd29008082821c173511e"; // Sostituisci con la tua chiave API TMDB
+        // &with_genres=${genreId}
+
+        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=1&language=it`)
+          .then(response => response.json())
+          .then(data => {
+            const carouselInner = document.querySelector(".carousel-inner");
+
+            // Rimuovi i vecchi film dal carousel
+            carouselInner.innerHTML = "";
+            const results = data.results.slice(0, 7);
+            // Aggiungi i nuovi film al carousel
+            results.forEach((movie, index) => {
+              const title = movie.title;
+              const description = movie.overview;
+              const posterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "Placeholder per copertina";
+
+              const movieItem = document.createElement("div");
+              movieItem.classList.add("carousel-item");
+              if (index === 0) {
+                movieItem.classList.add("active");
+              }
+              movieItem.innerHTML = `
+              <div style="position: relative; height: 563px;">
+                <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-image: url(${posterPath}); background-size: cover; background-position: center; opacity: 0.5;"></div>
+                <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    <img class="carousel-immagine-cover" src="${posterPath}" alt="${title}" style="width: 200px; height: auto; margin-right: 20px;">
+                    <div class="trama-desc" > <!-- Adatta la larghezza quando lo schermo è più grande -->
+                        <h5>${title}</h5>
+                        <p>${description}</p>
+                    </div>
+                </div>
+            </div>
+              `;
+
+              carouselInner.appendChild(movieItem);
+            });
+          })
+          .catch(error => console.error('Errore durante il caricamento dei film:', error));
+      }
+
+function loadRandomMovie() {
+    const apiKey = "96059f6ee5cfd29008082821c173511e"; // Sostituisci con la tua chiave API TMDB
+
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&page=1&language=it`)
+        .then(response => response.json())
+        .then(data => {
+            const searchResultsDiv = document.getElementById("searchResults");
+            searchResultsDiv.innerHTML = "";
+
+            data.results.forEach((movie, index) => {
+                const title = movie.title;
+
+                // Effettua una richiesta API per i dettagli del film, incluso il cast e il regista
+                fetch(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${apiKey}`)
+                    .then(response => response.json())
+                    .then(creditsData => {
+                        // Filtra solo le persone con il ruolo di regista
+                        const directors = creditsData.crew.filter(person => person.job === 'Director');
+                        // Estrai i nomi dei registi
+                        const directorNames = directors.map(director => director.name);
+                        // Unisci i nomi dei registi in una stringa separata da virgole
+                        const directorString = directorNames.join(', ');
+
+                        const voteAverage = movie.vote_average.toFixed(1);
+                        const posterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "Placeholder per copertina";
+                        const description = movie.overview;
+                        const cast = creditsData.cast;
+                        const nomiAttori = cast.map(actor => actor.name);
+                        const character = cast.map(actor => actor.character);
+                        const linkFotoAttori = cast.map(actor => `https://image.tmdb.org/t/p/w500/${actor.profile_path}`);
+
+                        // Effettua una richiesta API per il trailer del film
+                        fetch(`https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${apiKey}&language=it`)
+                            .then(response => response.json())
+                            .then(videoData => {
+                                // Estrai il link del trailer se disponibile
+                                const trailer = videoData.results.find(result => result.type === "Trailer");
+                                const trailerLink = trailer ? `https://www.youtube.com/watch?v=${trailer.key}` : "#";
+
+                                // Aggiorna il DOM con i dettagli del film, del cast e del trailer
+                                const movieDiv = document.createElement("div");
+                                movieDiv.classList.add("result-search");
+                                movieDiv.innerHTML = `
+                                    <form id="form_${index}" method="post" class="m.5">
+                                        <input type="hidden" name="form_id" value="${index}">
+                                        <input type="hidden" name="url_cover" value="${posterPath}">
+                                        <input type="hidden" name="titolo" value="${title}">
+                                        <input type="hidden" name="autore" value="${directorString}">
+                                        <input type="hidden" name="costo" value="None">
+                                        <input type="hidden" name="trama" value="${description}">
+                                        <input type="hidden" name="voto" value="${voteAverage}">
+                                        <input type="hidden" name="preview" value="${trailerLink}">
+                                        <input type="hidden" name="type" value="film">
+                                        <input type="hidden" name="attori" value="${nomiAttori}">
+                                        <input type="hidden" name="Fotoattori" value="${linkFotoAttori}">
+                                        <input type="hidden" name="character" value="${character}">
+                                        <img src="${posterPath}" alt="${title}" >
+                                        <div align="center">
+                                            <h6 name="titolo" >${title}</h6>
+                                        </div>
+                                        <p name="autore">Regista: ${directorString}</p>
+                                        <p>Voto del pubblico: <strong>${voteAverage} / 10 </strong></p>
+                                        <button type="submit" >Info</button>
+                                    </form>
+                                `;
+                                searchResultsDiv.appendChild(movieDiv);
+                            })
+                            .catch(error => console.error('Errore durante il recupero del trailer del film:', error));
+                    })
+                    .catch(error => console.error('Errore durante il recupero dei crediti del film:', error));
+            });
+        })
+        .catch(error => console.error('Errore durante il caricamento dei film casuali:', error));
+}
+
+    function loadMoviesByTitle(searchTerm) {
+      const apiKey = "96059f6ee5cfd29008082821c173511e"; // Sostituisci con la tua chiave API TMDB
+
+      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchTerm}&sort_by=popularity.desc&page=1&language=it`)
+          .then(response => response.json())
+            .then(data => {
+                const searchResultsDiv = document.getElementById("searchResults");
+                searchResultsDiv.innerHTML = "";
+
+                data.results.forEach((movie, index) => {
+                    const title = movie.title;
+
+                    // Effettua una richiesta API per i dettagli del film, incluso il cast e il regista
+                    fetch(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${apiKey}`)
+                        .then(response => response.json())
+                        .then(creditsData => {
+                            // Filtra solo le persone con il ruolo di regista
+                            const directors = creditsData.crew.filter(person => person.job === 'Director');
+                            // Estrai i nomi dei registi
+                            const directorNames = directors.map(director => director.name);
+                            // Unisci i nomi dei registi in una stringa separata da virgole
+                            const directorString = directorNames.join(', ');
+
+                            const voteAverage = movie.vote_average.toFixed(1);
+                            const posterPath = movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "Placeholder per copertina";
+                            const description = movie.overview;
+                            const cast = creditsData.cast;
+                            const nomiAttori = cast.map(actor => actor.name);
+                            const character = cast.map(actor => actor.character);
+                            const linkFotoAttori = cast.map(actor => `https://image.tmdb.org/t/p/w500/${actor.profile_path}`);
+
+                            // Effettua una richiesta API per il trailer del film
+                            fetch(`https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${apiKey}&language=it`)
+                                .then(response => response.json())
+                                .then(videoData => {
+                                    // Estrai il link del trailer se disponibile
+                                    const trailer = videoData.results.find(result => result.type === "Trailer");
+                                    const trailerLink = trailer ? `https://www.youtube.com/watch?v=${trailer.key}` : "#";
+
+                                    // Aggiorna il DOM con i dettagli del film, del cast e del trailer
+                                    const movieDiv = document.createElement("div");
+                                    movieDiv.classList.add("result-search");
+                                    movieDiv.innerHTML = `
+                                        <form id="form_${index}" method="post" class="m.5">
+                                            <input type="hidden" name="form_id" value="${index}">
+                                            <input type="hidden" name="url_cover" value="${posterPath}">
+                                            <input type="hidden" name="titolo" value="${title}">
+                                            <input type="hidden" name="autore" value="${directorString}">
+                                            <input type="hidden" name="costo" value="None">
+                                            <input type="hidden" name="trama" value="${description}">
+                                            <input type="hidden" name="voto" value="${voteAverage}">
+                                            <input type="hidden" name="preview" value="${trailerLink}">
+                                            <input type="hidden" name="type" value="film">
+                                            <input type="hidden" name="attori" value="${nomiAttori}">
+                                            <input type="hidden" name="Fotoattori" value="${linkFotoAttori}">
+                                            <input type="hidden" name="character" value="${character}">
+                                            <img src="${posterPath}" alt="${title}" >
+                                            <div align="center">
+                                                <h6 name="titolo" >${title}</h6>
+                                            </div>
+                                            <p name="autore">Regista: ${directorString}</p>
+                                            <p>Voto del pubblico: <strong>${voteAverage} / 10 </strong></p>
+                                            <button type="submit" >Info</button>
+                                        </form>
+                                    `;
+                                    searchResultsDiv.appendChild(movieDiv);
+                                })
+                                .catch(error => console.error('Errore durante il recupero del trailer del film:', error));
+                        })
+                        .catch(error => console.error('Errore durante il recupero dei crediti del film:', error));
+                });
+            })
+            .catch(error => console.error('Errore durante il caricamento dei film casuali:', error));
+    }
+
+  function loadTVShowsIntoCarousel() {
+    const apiKey = "96059f6ee5cfd29008082821c173511e"; // Sostituisci con la tua chiave API TMDB
+
+    fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&sort_by=popularity.desc&page=1&language=it`)
+          .then(response => response.json())
+          .then(data => {
+            const carouselInner = document.querySelector(".carousel-inner");
+
+            // Rimuovi i vecchi contenuti dal carousel
+            carouselInner.innerHTML = "";
+            const results = data.results.slice(0, 7);
+            // Aggiungi le nuove serie TV al carousel
+            results.forEach((show, index) => {
+                const title = show.name;
+                const description = show.overview;
+                const truncatedDescription = truncateDescription(description);
+                const posterPath = show.poster_path ? `https://image.tmdb.org/t/p/w500${show.poster_path}` : "Placeholder per copertina";
+
+                const showItem = document.createElement("div");
+                showItem.classList.add("carousel-item");
+                if (index === 0) {
+                    showItem.classList.add("active");
+                }
+                showItem.innerHTML = `
+                    <div style="position: relative; height: 563px;">
+                        <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-image: url(${posterPath}); background-size: cover; background-position: center; opacity: 0.5;"></div>
+                        <div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <img class="carousel-image-cover" src="${posterPath}" alt="${title}" style="width: 200px; height: auto; margin-right: 20px;">
+                            <div class="trama-desc" > <!-- Adatta la larghezza quando lo schermo è più grande -->
+                                <h5>${title}</h5>
+                                <p>${truncatedDescription}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                carouselInner.appendChild(showItem);
+            });
+        })
+        .catch(error => console.error('Errore durante il caricamento delle serie TV:', error));
+}
+
+function loadRandomTVShow() {
+    const apiKey = "96059f6ee5cfd29008082821c173511e"; // Sostituisci con la tua chiave API TMDB
+
+    fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&sort_by=popularity.desc&page=1&language=it`)
+        .then(response => response.json())
+        .then(data => {
+            const searchResultsDiv = document.getElementById("searchResults");
+            searchResultsDiv.innerHTML = "";
+
+            data.results.forEach((show, index) => {
+                const title = show.name;
+                const voteAverage = show.vote_average.toFixed(1);
+                const posterPath = show.poster_path ? `https://image.tmdb.org/t/p/w500${show.poster_path}` : "Placeholder per copertina";
+                const description = show.overview;
+
+                // Chiamata API per ottenere il cast
+                fetch(`https://api.themoviedb.org/3/tv/${show.id}/credits?api_key=${apiKey}`)
+                    .then(response => response.json())
+                    .then(credits => {
+                        const cast = credits.cast;
+                        const nomiAttori = cast.map(actor => actor.name);
+                        const character = cast.map(actor => actor.character);
+                        const linkFotoAttori = cast.map(actor => actor.profile_path ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}` : "Placeholder per attore");
+
+                        // Aggiorna il DOM con i dettagli della serie TV e del cast
+                        const showDiv = document.createElement("div");
+                        showDiv.classList.add("result-search");
+                        showDiv.innerHTML = `
+                            <form id="form_${index}" method="post" class="m.5">
+                                <input type="hidden" name="form_id" value="${index}">
+                                <input type="hidden" name="url_cover" value="${posterPath}">
+                                <input type="hidden" name="titolo" value="${title}">
+                                <input type="hidden" name="voto" value="${voteAverage}">
+                                <input type="hidden" name="trama" value="${description}">
+                                <input type="hidden" name="preview" value="#">
+                                <input type="hidden" name="costo" value="None">
+                                <input type="hidden" name="type" value="serieTv">
+                                <input type="hidden" name="attori" value='${nomiAttori}'>
+                                <input type="hidden" name="Fotoattori" value='${linkFotoAttori}'>
+                                <input type="hidden" name="character" value='${character}'>
+
+                                <img src="${posterPath}" alt="${title}" >
+                                <div align="center">
+                                    <h6 name="titolo">${title}</h6>
+                                </div>
+                                <p>Voto del pubblico: <strong>${voteAverage} / 10 </strong></p>
+                                <button type="submit">Info</button>
+                            </form>
+                        `;
+                        searchResultsDiv.appendChild(showDiv);
+                    })
+                    .catch(error => console.error('Errore durante il caricamento del cast:', error));
+            });
+        })
+        .catch(error => console.error('Errore durante il caricamento delle serie TV casuali:', error));
+}
+
+
+function loadTVShowsByTitle(searchTerm) {
+  const apiKey = "96059f6ee5cfd29008082821c173511e"; // Sostituisci con la tua chiave API TMDB
+
+  fetch(`https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&query=${searchTerm}&language=it`)
+      .then(response => response.json())
+        .then(data => {
+            const searchResultsDiv = document.getElementById("searchResults");
+            searchResultsDiv.innerHTML = "";
+
+            data.results.forEach((show, index) => {
+                const title = show.name;
+                const voteAverage = show.vote_average.toFixed(1);
+                const posterPath = show.poster_path ? `https://image.tmdb.org/t/p/w500${show.poster_path}` : "Placeholder per copertina";
+                const description = show.overview;
+
+                // Chiamata API per ottenere il cast
+                fetch(`https://api.themoviedb.org/3/tv/${show.id}/credits?api_key=${apiKey}`)
+                    .then(response => response.json())
+                    .then(credits => {
+                        const cast = credits.cast;
+                        const nomiAttori = cast.map(actor => actor.name);
+                        const character = cast.map(actor => actor.character);
+                        const linkFotoAttori = cast.map(actor => actor.profile_path ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}` : "Placeholder per attore");
+
+                        // Aggiorna il DOM con i dettagli della serie TV e del cast
+                        const showDiv = document.createElement("div");
+                        showDiv.classList.add("result-search");
+                        showDiv.innerHTML = `
+                            <form id="form_${index}" method="post" class="m.5">
+                                <input type="hidden" name="form_id" value="${index}">
+                                <input type="hidden" name="url_cover" value="${posterPath}">
+                                <input type="hidden" name="titolo" value="${title}">
+                                <input type="hidden" name="voto" value="${voteAverage}">
+                                <input type="hidden" name="trama" value="${description}">
+                                <input type="hidden" name="preview" value="#">
+                                <input type="hidden" name="costo" value="None">
+                                <input type="hidden" name="type" value="serieTv">
+                                <input type="hidden" name="attori" value='${nomiAttori}'>
+                                <input type="hidden" name="Fotoattori" value='${linkFotoAttori}'>
+                                <input type="hidden" name="character" value='${character}'>
+
+                                <img src="${posterPath}" alt="${title}" >
+                                <div align="center">
+                                    <h6 name="titolo">${title}</h6>
+                                </div>
+                                <p>Voto del pubblico: <strong>${voteAverage} / 10 </strong></p>
+                                <button type="submit">Info</button>
+                            </form>
+                        `;
+                        searchResultsDiv.appendChild(showDiv);
+                    })
+                    .catch(error => console.error('Errore durante il caricamento del cast:', error));
+            });
+        })
+        .catch(error => console.error('Errore durante il caricamento delle serie TV casuali:', error));
+}
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        if (genereAmato == 'None') {
+          loadRandomBooks();
+          loadBooksIntoCarousel();
+        }
+        else{
+          loadRandomBooksfromGenre(genereAmato);
+          loadBooksIntoCarouselGenre(genereAmato);
+        }
+      });
+</script>
+
+    <script>
+
+      const searchInput = document.getElementById("searchInput");
+      const searchResultsDiv = document.getElementById("searchResults");
+
+      searchInput.addEventListener("input", function() {
+        const searchTerm = this.value.trim();
+        var index = 0;
+        if (libri_clicked){
+          if (searchTerm !== "") {
+            // Effettua una richiesta fetch all'API di Google Books
+            loadRandomBooksfromGenre(searchTerm);
+          } else {
+            // Se il campo di ricerca è vuoto, mostra un messaggio di avviso
+            loadRandomBooksfromGenre("Sindrome");
+          }
+        }
+        else if(movie_clicked){
+          if (searchTerm !== "") {
+            // Effettua una richiesta fetch all'API di Google Books
+            loadMoviesByTitle(searchTerm);
+          } else {
+            // Se il campo di ricerca è vuoto, mostra un messaggio di avviso
+            loadRandomMovie();
+          }
+        }
+        else if(series_clicked){
+          if (searchTerm !== "") {
+            // Effettua una richiesta fetch all'API di Google Books
+            loadTVShowsByTitle(searchTerm);
+          } else {
+            // Se il campo di ricerca è vuoto, mostra un messaggio di avviso
+            loadRandomTVShow();
+          }
+        }
+      });
+
+
+
+    </script>
+
+{% endblock %}

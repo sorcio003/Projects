@@ -1,0 +1,15 @@
+ID: 4 ;
+
+Nome: Percezione_Divina ;
+
+Type: Trucchetto ;
+
+Description: "Una azione Bonus unica del Paladino, in grado di sfruttare le sue conoscenze e le sue consapevolezze per predirre le mosse dell'avversario in battaglia, per agire in base alla sua visione prendendo la scelta migliore" ; 
+
+HowToUse: "Tiro sulla CD calcolata in Battaglia (8 + bonus comp. + 1d6)" ; 
+
+Cost: 5 ;
+Level: 5 ;
+Danno: 0 ;
+
+"Il Damage Viene calcolato in Battaglia";

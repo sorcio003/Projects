@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% block title %}Ohana's Library{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="static/card.css">
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<style>
+  .input {
+    width: 70%;
+    height: 40px;
+    line-height: 28px;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f3f3f4;
+    color: #0d0c22;
+    transition: .3s ease;
+   }
+
+   .input::placeholder {
+    color: #9e9ea7;
+   }
+
+   .input:focus, input:hover {
+    outline: none;
+    border-color: rgba(234,76,137,0.4);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+   }
+</style>
+
+<br><br><br>
+{% if not user.notes %}
+<div align="center">
+    <h1 style="color:var(--color-primary); ">Libreria vuota</h1>
+    <img src="https://png.pngtree.com/png-vector/20221127/ourmid/pngtree-black-torn-cobweb-spider-web-net-cartoon-on-transparent-background-png-image_6474363.png" alt="web">
+</div>
+{% endif %}
+
+{% if user.notes %}
+<div class="gruppo_input" align="center">
+  <div class="search_group" >
+    <div style="position:relative; align-items: center;">
+      <input class="input" id="searchInput" type="search" placeholder="Search" />
+
+    </div>
+  </div>
+</div>
+<br>
+<div align="center">
+  <button class="btn btn-primary" id="libriButton">Libri</button>
+  <button class="btn btn-primary" id="filmButton">Film</button>
+  <button class="btn btn-primary" id="seriesButton">Tv Series</button>
+</div>
+{% endif %}
+
+<div id="colonne" >
+    <div class="row" id="card-book" style="margin: 15px; ">
+      {% for note in book %}
+      <div class="classe container responsive book-container-list" style="width: 350px;" >
+        <p style="display:none;" class="type">{{note.tipo}}</p>
+        <div class="mobile-layout" style="background-color: {{note.mobilebg}};">
+          <div class="book-cover" style="background-color: {{note.introbg}};">
+              <img class="book-top" style="border-radius: 15px;" src="{{note.url_cover}}" alt="book-top" />
+            <img class="book-side" src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg" alt="book-side" />
+          </div>
+
+          <div class="preface">
+
+            <div class="content">
+
+
+              <div class="header">
+
+                <div class="Titolo titles-book" style="width: 250px;"><a style="text-decoration: none; color: {{note.fontcolor}}; ::hover{color: rgb(26, 26, 26);}" href="/info/{{note.id}}/{{note.titolo}}">
+                {{ note.titolo }}
+                </a></div>
+
+                <div class="icon">
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+
+              </div>
+              <div class="author" style="width: 250px;">by {{ note.autore }}
+                <form action="{{note.id}}/delete" method="POST" style="float: right;">
+                  <button type="button" onClick="deleteNote({{ note.id }})" class="btn btn-danger btn-sm">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </form>
+              <form method="POST" style="float: right;">
+                  <button type="submit" class="btn btn-info btn-sm"><a href="/info/{{note.id}}/{{note.titolo}}/edit" style="text-decoration: none; color: white;">Modify</a></button>
+              </form>
+              </div>
+              <div class="body">
+                <li class="Titolo voto" id="valutation-{{note.id}}" value="{{ note.valutazione }}" style="list-style-type: none; font-size:smaller ; float: left;">Voto: </li>
+                <br><br>
+                <li class="Titolo piccante" id="Spicy-{{note.id}}" value="{{ note.spicy }}" style="list-style-type: none; font-size:smaller ; float: left;">Spicy: </li>
+                <br><br>
+                <li class="Titolo pianto" id="Lacrime-{{note.id}}" value="{{ note.lacrime }}" style="list-style-type: none; font-size:smaller ; float: left;">Lacrime: </li>
+                <br>
+                <br>
+                <p>
+                  <strong>Frase Preferita:</strong>  {{ note.best_Phrase }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    $('.container.responsive').hide(); // Nasconde tutte le note
+      $('.container.responsive').each(function() {
+          if ($(this).find('.type').text() === 'libro') {
+              $(this).show(); // Mostra solo le note di tipo libro
+          }
+      });
+    $(document).ready(function() {
+    $('#libriButton').click(function() {
+      $('.container.responsive').hide(); // Nasconde tutte le note
+      $('.container.responsive').each(function() {
+          if ($(this).find('.type').text() === 'libro') {
+              $(this).show(); // Mostra solo le note di tipo libro
+          }
+      });
+  });
+
+  // Mostra solo le note di tipo film quando il pulsante "Film" viene cliccato
+  $('#filmButton').click(function() {
+      $('.container.responsive').hide(); // Nasconde tutte le note
+      $('.container.responsive').each(function() {
+          if ($(this).find('.type').text() === 'film') {
+              $(this).show(); // Mostra solo le note di tipo film
+          }
+      });
+  });
+
+  // Mostra solo le note di tipo serieTv quando il pulsante "SerieTv" viene cliccato
+  $('#seriesButton').click(function() {
+      $('.container.responsive').hide(); // Nasconde tutte le note
+      $('.container.responsive').each(function() {
+          if ($(this).find('.type').text() === 'serieTv') {
+              $(this).show(); // Mostra solo le note di tipo serieTv
+          }
+      });
+  });
+});
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $('#searchInput').on('input', function() {
+          var searchText = $(this).val().toLowerCase();
+          $('.classe').each(function() {
+              var bookTitle = $(this).find('.Titolo').text().toLowerCase();
+              var authorName = $(this).find('.author').text().toLowerCase();
+              if (bookTitle.includes(searchText) || authorName.includes(searchText)) {
+                  $(this).show();
+              } else {
+                  $(this).hide();
+              }
+          });
+      });
+    });
+  </script>
+
+  <script>
+    var rowElement = document.getElementById('card-book')
+    var numberOfBook = rowElement.childElementCount
+
+    if (numberOfBook %5 == 0){
+      const newLine = document.createElement('<br')
+      rowElement.appendChild(newLine)
+    }
+  </script>
+
+<script>
+
+  var votation = document.getElementsByClassName("voto");
+  var spicy = document.getElementsByClassName("piccante");
+  var Lacrime = document.getElementsByClassName("pianto");
+
+  for (let i = 0; i < votation.length; i++) {
+    votation[i].id = "valutation-" + (i);
+  }
+  for (let i = 0; i < spicy.length; i++) {
+    spicy[i].id = "Spicy-" + (i);
+  }
+  for (let i = 0; i < Lacrime.length; i++) {
+    Lacrime[i].id = "Lacrime-" + (i);
+  }
+
+  for (let i = 0; i < votation.length; i++) {
+    var vote = document.getElementById('valutation-' + i)
+    var votazione = vote.value
+
+  for (let x = 0; x < votazione ; x++){
+      const star = document.createTextNode("⭐")
+      vote.appendChild(star)
+    }
+  }
+
+  for (let i = 0; i < spicy.length; i++) {
+    var hot = document.getElementById('Spicy-' + i)
+    var piccante = hot.value
+
+  for (let x = 0; x < piccante ; x++){
+      const star = document.createTextNode("🌶️")
+      hot.appendChild(star)
+    }
+  }
+
+  for (let i = 0; i < Lacrime.length; i++) {
+    var goccia = document.getElementById('Lacrime-' + i)
+    var pianto = goccia.value
+
+  for (let x = 0; x < pianto ; x++){
+      const star = document.createTextNode("💧")
+      goccia.appendChild(star)
+    }
+  }
+
+</script>
+
+
+{% endblock %}

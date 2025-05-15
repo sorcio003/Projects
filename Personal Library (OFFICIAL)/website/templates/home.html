@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ user.username }}'s Library{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="static/home.css">
+<link rel="stylesheet" href="static/text_writing.css">
+<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+
+    <br>
+    <h1 style="text-align: center;">Welcome To {{user.username}} Library</h1>
+    <div>
+      <div class="animation text-hover">Che cos'è?</div>
+      <p style="border: 2px; margin: 2%; color: black; font-family:'Courier New', Courier, monospace ; font-size: large; width: 50%; transform: translateX(70px);">
+        L'idea Nasce come progetto di memorizzazione dei propri libri letti,
+        inserendo il <strong>Titolo</strong>, <strong>l'Autore</strong> e anche le proprie
+        recensioni sul libro come la valutazione.
+        <ul style="font-size:medium;">
+          <li>
+            Valutazione in Stelle: ⭐⭐⭐⭐⭐
+          </li>
+          <li>
+            Valutazione Emotiva: 💧 💧 💧 💧 💧
+          </li>
+          <li>
+            Valutazione Piccante: 🌶️🌶️🌶️🌶️🌶️
+          </li>
+        </ul>
+      </p>
+    </div>
+    <div>
+      <div class="animation_star">Come Funziona ?</div>
+      <p style="border: 2px; margin: 2%; color: black; font-family:'Courier New', Courier, monospace ; font-size: large; width: 50%; transform: translateX(70px);">
+       All'interno della Pagina <strong><a href="/create" style="text-decoration: none; color: rgb(0, 174, 255);">Crea</a></strong> troverai tutti i campi
+       dove poter inserire il titolo, il nome dell'autore, il nome del libro, la copertina stessa (Attualmente tramite URL link),
+       e anche le preferenze dei personaggi all'interno del libro nonchè la <strong>Scena che più ti ha colpito/a</strong> e
+       <strong>La Frase che ti ha toccato/a nel profondo</strong>
+    </div>
+
+    <div>
+      <div class="animation">Modificare I Libri?</div>
+      <p style="border: 2px; margin: 2%; color: black; font-family:'Courier New', Courier, monospace ; font-size: large; width: 50%; transform: translateX(70px);">
+       All'interno della Pagina <strong><a href="/lista_libri" style="text-decoration: none; color: rgb(0, 174, 255);">Lista libri</a></strong> troverai tutti i libri
+       aggiunti in ordine di inserimento, sulla scheda del libro troverai due pulsanti, uno <strong style="color: red;">Rosso</strong> per rimuovere il libro inserimento,
+       e uno <strong style="color: rgb(8, 197, 197);">Celeste</strong> con il quale puoi modificare i campi del libri, come ad esempio la data di fine libro, il Personaggio
+       preferito, o inserire la Trama.
+       Inoltrre, cliccando sul nome del libro Accederai alla visualizzazione di esso.
+
+    </div>
+
+
+{% endblock %}

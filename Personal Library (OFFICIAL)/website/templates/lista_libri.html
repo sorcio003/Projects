@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}{{ user.username }}'s Library{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="static/card.css">
+
+<div id="colonne" >
+    <div class="row" id="card-book" style="margin: 15px; ">
+      {% for note in user.notes %}
+      <div class="container" style="width: 350px;" >
+        <div class="mobile-layout" style="background-color: {{note.mobilebg}};">
+          <div class="book-cover" style="background-color: {{note.introbg}};">
+              <img class="book-top" style="border-radius: 15px;" src="{{note.url_cover}}" alt="book-top" />
+            <img class="book-side" src="https://raw.githubusercontent.com/atomic-variable/images-repo/e37f432405904a280858e5437ce1960753bc78a3/book-side.svg" alt="book-side" />
+          </div>
+
+          <div class="preface">
+
+            <div class="content">
+
+
+              <div class="header">
+
+                <div class="title" style="width: 250px;"><a style="text-decoration: none; color: {{note.fontcolor}}; ::hover{color: rgb(26, 26, 26);}" href="/info/{{note.id}}/{{note.titolo}}">
+                {{ note.titolo }}
+                </a></div>
+
+                <div class="icon">
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+
+              </div>
+              <div class="author" style="width: 250px;">by {{ note.autore }}
+                <form action="{{note.id}}/delete" method="POST" style="float: right;">
+                  <button type="button" onClick="deleteNote({{ note.id }})" class="btn btn-danger btn-sm">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </form>
+              <form method="POST" style="float: right;">
+                  <button type="submit" class="btn btn-info btn-sm"><a href="/info/{{note.id}}/{{note.titolo}}/edit" style="text-decoration: none; color: white;">Modify</a></button>
+              </form>
+              </div>
+              <div class="body">
+                <li class="title voto" id="valutation-{{note.id}}" value="{{ note.valutazione }}" style="list-style-type: none; font-size:smaller ; float: left;">Voto: </li>
+                <br><br>
+                <li class="title piccante" id="Spicy-{{note.id}}" value="{{ note.spicy }}" style="list-style-type: none; font-size:smaller ; float: left;">Spicy: </li>
+                <br><br>
+                <li class="title pianto" id="Lacrime-{{note.id}}" value="{{ note.lacrime }}" style="list-style-type: none; font-size:smaller ; float: left;">Lacrime: </li>
+                <br>
+                <br>
+                <p>
+                  <strong>Frase Preferita:</strong>  {{ note.best_Phrase }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    var rowElement = document.getElementById('card-book')
+    var numberOfBook = rowElement.childElementCount
+
+    if (numberOfBook %5 == 0){
+      const newLine = document.createElement('<br')
+      rowElement.appendChild(newLine)
+    }
+  </script>
+
+<script>
+
+  var votation = document.getElementsByClassName("voto");
+  var spicy = document.getElementsByClassName("piccante");
+  var Lacrime = document.getElementsByClassName("pianto");
+
+  for (let i = 0; i < votation.length; i++) {
+    votation[i].id = "valutation-" + (i);
+  }
+  for (let i = 0; i < spicy.length; i++) {
+    spicy[i].id = "Spicy-" + (i);
+  }
+  for (let i = 0; i < Lacrime.length; i++) {
+    Lacrime[i].id = "Lacrime-" + (i);
+  }
+
+  for (let i = 0; i < votation.length; i++) {
+    var vote = document.getElementById('valutation-' + i)
+    var votazione = vote.value
+
+  for (let x = 0; x < votazione ; x++){
+      const star = document.createTextNode("⭐")
+      vote.appendChild(star)
+    }
+  }
+
+  for (let i = 0; i < spicy.length; i++) {
+    var hot = document.getElementById('Spicy-' + i)
+    var piccante = hot.value
+
+  for (let x = 0; x < piccante ; x++){
+      const star = document.createTextNode("🌶️")
+      hot.appendChild(star)
+    }
+  }
+
+  for (let i = 0; i < Lacrime.length; i++) {
+    var goccia = document.getElementById('Lacrime-' + i)
+    var pianto = goccia.value
+
+  for (let x = 0; x < pianto ; x++){
+      const star = document.createTextNode("💧")
+      goccia.appendChild(star)
+    }
+  }
+</script>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}{{ titolo }}{% endblock %}
+
+{% block content %}
+
+<div style="background-color:#eaeaea; font-size: 12px; padding: 120px 40px;">
+    <form action="{{ url_for('views.add_to_wishlist') }}" method="post" class="m.5">
+        <input type="hidden" name="url_cover" value="{{ url_cover }}">
+        <input type="hidden" name="titolo" value="{{ titolo }}">
+        <input type="hidden" name="autore" value="{{ autore }}">
+        <input type="hidden" name="costo" value="{{ costo }}">
+        <input type="hidden" name="trama" value="{{ trama }}">
+        <input type="hidden" name="tipo" value="{{ tipo }}">
+
+        <div align="center">
+            <img width="180px" height="280px" src="{{ url_cover }}" alt="img">
+            <br><br>
+            <h6 name="titolo" style="font-size:20px;font-family:Papyrus;"><strong>{{ titolo }}</strong></h6>
+            <br>
+        </div>
+
+        <div style="border: 2px solid black; font-size:12px;" align="center">
+            {% if tipo == "libro" %}
+            <p name="autore"><strong>Autore: {{ autore }}</strong></p>
+            <p name="genere"><strong>Genere: {{ genere }}</strong></p>
+            {% else %}
+            <p name="autore"><strong>Regista: {{ autore }}</strong></p>
+            {% endif %}
+            <p>{{ trama }}</p>
+            {% if tipo == "film" or tipo=="serieTv" %}
+            <div id="cast" style="max-height: 150px; overflow: hidden;">
+                {% for attore, foto_attore, character in jinja2_zip(attori, foto, character) %}
+                <div style="display: inline-block; margin-right: 20px;">
+                    <img width="100px" height="130px" src="{{ foto_attore }}" alt="{{ attore }}">
+                    <p style="text-align: center;"><strong>{{ attore }}</strong></p>
+                    <p style="text-align: center;"><strong>{{ character }}</strong></p>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="button" class="btn btn-primary" id="toggleCastBtn">Mostra/Nascondi Cast</button>
+            {% endif %}
+
+            <div style="color: var(--color-primary); font-size:16px;">
+                {% if tipo == "libro" %}
+                <p><strong>Prezzo: {{ costo }} €</strong></p>
+                {% else %}
+                <p><strong>Recensione: {{ voto }} / 10</strong></p>
+                {% endif %}
+                {% if tipo == "libro" %}
+                <div align="center" style="margin-top: 20px;">
+                    <button type="button" class="btn btn-secondary" id="downloadPreviewBtn" data-src="{{ preview }}">Visualizza Anteprima</button>
+                </div>
+                <br>
+                {% else %}
+                <div align="center" style="margin-top: 20px;">
+                    <button type="button" class="btn btn-secondary" id="viewTrailerBtn" src="{{ preview }}">Visualizza Trailer</button>
+                </div>
+                <br>
+                {% endif %}
+            </div>
+        </div>
+
+        <br><br>
+        <button type="submit" class="btn btn-primary">Add Wish List</button>
+        <br>
+    </form>
+</div>
+
+<!-- PDF -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('downloadPreviewBtn').addEventListener('click', function() {
+            var previewUrl = this.getAttribute('data-src');
+            if (previewUrl) {
+                var hiddenLink = document.createElement('a');
+                hiddenLink.href = previewUrl;
+                hiddenLink.target = '_blank';
+                hiddenLink.download = 'preview.pdf';
+                hiddenLink.style.display = 'none';
+                document.body.appendChild(hiddenLink);
+                hiddenLink.click();
+                document.body.removeChild(hiddenLink);
+            } else {
+                alert('URL dell\'anteprima non disponibile');
+            }
+        });
+    });
+
+
+    document.getElementById('toggleCastBtn').addEventListener('click', function() {
+        var castDiv = document.getElementById('cast');
+        if (castDiv.style.maxHeight === '150px') {
+            castDiv.style.maxHeight = 'none';
+            this.innerText = 'Nascondi Cast';
+        } else {
+            castDiv.style.maxHeight = '150px';
+            this.innerText = 'Mostra Cast';
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Seleziona il pulsante "Visualizza Trailer"
+        const viewTrailerBtn = document.getElementById('viewTrailerBtn');
+
+        // Aggiungi un gestore di eventi click al pulsante
+        viewTrailerBtn.addEventListener('click', function() {
+            // Ottieni il link del trailer dalla proprietà "src" del pulsante
+            const trailerLink = this.getAttribute('src');
+
+            // Controlla se il link del trailer è valido
+            if (trailerLink) {
+                // Apri la pagina del trailer in una nuova scheda
+                window.open(trailerLink, '_blank');
+            } else {
+                // Avviso se il link del trailer non è disponibile
+                alert('Link del trailer non disponibile.');
+            }
+        });
+    });
+</script>
+
+{% endblock %}

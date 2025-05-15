@@ -1,0 +1,15 @@
+ID: 3 ;
+
+Nome: Dardo_Incantato ;
+
+Type: Invocazione ;
+
+Description: L'incantatore crea tre dardi lucenti di forza magica. Ogni dardo colpisce una creatura scelta dall'incantatore, situata entro gittata e che egli sia in grado di vedere. Un dardo infligge 1d4+1 danni da forza al suo bersaglio. Tutti i dardi colpiscono simultaneamente e l'incantatore pu• dirigerli per colpire una sola creatura o pi— creature. (Gittata 36 Metri) ; 
+
+HowToUse: Il giocatore lancia un Dado 1d4 + i danno dell'ATK del Personaggio calcolati (ATK - CA nemico) ; 
+
+Cost: 3 ;
+Level: 0 ;
+Danno: 0 ;
+
+"Il Damage Viene calcolato in Battaglia";
