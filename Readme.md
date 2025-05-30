@@ -10,6 +10,9 @@ Benvenuto nel mio **laboratorio digitale**, una raccolta di progetti personali (
 
 Ecco una panoramica dei progetti principali presenti:
 
+### 🎲 D&D 5th Edition – C Version
+> Implementazione **in C** delle regole base della quinta edizione di Dungeons & Dragons. Perfetto per amanti del gioco e del basso livello.
+
 ### 🔁 TimerCash v2
 > **Versione rinnovata** di TimerCash, con funzionalità avanzate, interfaccia migliorata e gestione più intelligente del tempo.
 
@@ -21,9 +24,6 @@ Ecco una panoramica dei progetti principali presenti:
 
 ### 🗺️ AutoOrtho Run
 > Automazione dell’elaborazione delle ortofoto per ambienti 3D. Un must-have per appassionati di simulazione e GIS.
-
-### 🎲 D&D 5th Edition – C Version
-> Implementazione **in C** delle regole base della quinta edizione di Dungeons & Dragons. Perfetto per amanti del gioco e del basso livello.
 
 ### 📚 Ohana's Library Website
 > Un **sito web elegante** per la gestione e visualizzazione di una libreria personale o di comunità. Dedicato a chi ama l'ordine tra i libri.
