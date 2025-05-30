@@ -36,6 +36,7 @@ Ecco una panoramica dei progetti principali presenti:
 ## 🎯 Obiettivo
 
 Questo repository non è solo un archivio, ma un diario digitale della mia evoluzione come sviluppatore. Alcuni progetti sono **completi e funzionanti**, altri sono **work in progress** o **concept sperimentali**. Tutti rappresentano **passione, apprendimento** e **curiosità**.
+Chiunque voglia apportare le proprie modifiche può farlo.
 
 ---
 
