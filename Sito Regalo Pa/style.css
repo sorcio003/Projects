@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+body {
+    font-family: 'Great Vibes', cursive;
+}
+body {
+    background-color: #2c3e50; /* Colore di sfondo scuro */
+    color: #ecf0f1; /* Colore del testo chiaro */
+}
+
+header {
+    text-align: center;
+    padding: 50px 0;
+}
+
+h1 {
+    font-size: 48px;
+    color: #f39c12; /* Colore vivace */
+}
+
+.main-content {
+    padding: 20px;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #34495e; /* Colore di sfondo del piè di pagina */
+}
+.contact-form {
+    text-align: center;
+    padding: 40px;
+    background-color: #34495e; /* Colore di sfondo del modulo di contatto */
+    color: #ecf0f1; /* Colore del testo chiaro */
+}
+
+.contact-form h2 {
+    margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    background-color: #f39c12; /* Colore del pulsante */
+    color: #fff; /* Colore del testo del pulsante */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #e67e22; /* Cambia colore al passaggio del mouse */
+}
+
+.separator {
+    border: none;
+    height: 2px; /* Spessore della linea */
+    background-color: #000; /* Colore della linea */
+    margin: 20px auto; /* Margine sopra e sotto */
+    width: 100%; /* Larghezza della linea */
+}
+
+.line-letter-left {
+    border: none;
+    height: 2px; /* Spessore della linea */
+    background-color: #000; /* Colore della linea */
+    margin: 20px auto; /* Margine sopra e sotto */
+    width: 62%; /* Larghezza della linea */
+    transform: rotateZ(30deg) translate(-45px, 110px);
+}
+
+.line-letter-right {
+    border: none;
+    height: 2px; /* Spessore della linea */
+    background-color: #000; /* Colore della linea */
+    margin: 20px auto; /* Margine sopra e sotto */
+    width: 62%; /* Larghezza della linea */
+    transform: rotateZ(-30deg) translate(55px, 90px);
+
+}
+
+/* Stile per la busta */
+.envelope {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background-color: #f9e7cc; /* Colore della busta */
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 50px auto;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-20px);
+}
+
+/* Stile per il sigillo di cera */
+.wax-seal {
+    top: -20px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: #b22222; /* Colore della cera lacca */
+    border-radius: 50%;
+    transition: opacity 0.5s ease;
+    transform: translateY(70px);
+}
+
+.envelope:hover .wax-seal {
+    opacity: 0;
+}
+.envelope:hover .lettera_scomparsa{
+    opacity: 0;
+}
+
+/* Stile per la lettera */
+.letter {
+    display: none;
+    position: absolute;
+    font-size: large;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    padding: 20px;
+    width:600px;
+    height: 800px;
+    background-color: white;
+    border: 1px solid #000;
+    color: #000;
+    border-radius: 10px;
+    z-index: -1;
+    transition: opacity 0.5s ease, transform 2s ease;
+}
+
+.envelope:hover .letter {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+
+}
+
+/* Stile per la navbar */
+nav {
+    background-color: #333; /* Colore di sfondo */
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: #111; /* Cambio di colore al passaggio del mouse */
+}
+
+
+

@@ -1,0 +1,26 @@
+.text 
+
+	li $s0, 4	#a
+	li $s1, 10	#b
+	li $s2, 8	#c
+	addi $s3, $s2, 0	#x
+	
+	slt $t0, $s1, $s0	#a>b
+	slt $t1, $s2, $s0	#a>c
+	and $t0, $t0, $t1
+	bne $t0, $zero, label
+	slt $t0, $s2, $s1 	#b>c
+	beq $t0, $zero, end
+	addi $s3, $s1, 0
+	j end
+	
+	label:
+	addi $s3, $s0, 0
+	
+	end:
+	li $v0, 1
+	addi $a0, $s3, 0
+	syscall
+	
+	li $v0, 10
+	syscall

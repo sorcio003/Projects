@@ -17,7 +17,7 @@ void CreationFile()
 
 while ((strcmp(exitCommand, "Enemy") != 0) && (strcmp(exitCommand, "Player") != 0))
 {
-    printf("Do you want open Enemy file or player file (No to exit)? "); scanf("%s", exitCommand); 
+    printf("Do you want open Enemy file or Player file (No to exit)? "); scanf("%s", exitCommand); 
     ChangeCaseOfWords(exitCommand);
     // Exit Mode
     if ( (strcmp(exitCommand, "No") == 0) ) { system("@cls||clear"); return ; } 

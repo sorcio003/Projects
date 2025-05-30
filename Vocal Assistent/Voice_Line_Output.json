@@ -1,0 +1,18 @@
+{
+
+"possibleNameRequest" : ["nome", "Nome","Nome?", "nome?", "chiami?"],
+    
+"possibleVioletAnswerName" : ["Sono la vostra Auto Memory Doll, Violet Evergarden",
+                              "Mi presento\nIl mio nome e' Violet Evergarden"], 
+
+"possibleVioletNameGave" : ["Mi scusi, avete gia porto questa domanda",
+                            "Mi perdoni, le ho gia dato questa infromazione"], 
+
+"possibleVioletAnswer" : ["Sono a vostra Disposizione", 
+                          "Mi dica",
+                          "Sono pronta a servirla"], 
+
+"possibleApoligizeVioletAnswer" : ["Mi scuso per il disagio, non ho capito la domanda",
+                                  "Non ho capito, mi scusi",
+                                  "Non ho compreso la vostra richiesta"]
+}
